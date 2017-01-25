@@ -1,14 +1,12 @@
-# SharedBooks
+# BookStore
 A simple web app for sharing books
+The project consists of an online platform that allows the sale of new or used books among users.
 
-The project consists of an online platform that allows the sale of new books or used among users.
+#Author:
+ * Luis Miguel MejÌa Su·rez
 
-#Authors:
- * Johan Sebasti√°n Yepes R√≠os
- * Juan Diego Ocampo
- * Luis Miguel Mej√≠a Su√°rez
-
-Universidad EAFIT - 2016 (T√≥picos Especiales en Ingenier√≠a de Software)
+Universidad EAFIT - 2017 (TÛpicos Especiales en Telem·tica)
 
 #Disclaimer
-This project uses the FuelPHP Framework
+This project uses the FuelPHP Framework (http://fuelphp.com/)
+This project is a modification of SharedBooks (https://github.com/jocamp18/SharedBooks)
