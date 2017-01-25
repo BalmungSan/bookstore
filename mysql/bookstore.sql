@@ -1,5 +1,5 @@
 -- -----------------------------------------------------
--- Copyright 2016 SharedBooks
+-- Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
 --
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `email` NVARCHAR(50) NOT NULL COMMENT 'Must be a valid email address',
   `password` BINARY(32) NOT NULL COMMENT 'md5 hash',
-  `profile_img` MEDIUMBLOB NULL,
-  `real_name` NVARCHAR(50) NOT NULL,
+  `name` NVARCHAR(50) NOT NULL,
   `city_id` INT NOT NULL,
   `address` NVARCHAR(50) NOT NULL COMMENT 'the address where the user wants to receive the books he buys',
+  `balance` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
   UNIQUE INDEX `user_email_UNIQUE` (`email` ASC),
@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS `books` (
   `author` NVARCHAR(50) NOT NULL,
   `is_new` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '1 is new, 0 is second hand',
   `category_id` INT NOT NULL,
-  `img` MEDIUMBLOB NULL,
   `price` INT NOT NULL DEFAULT 0 COMMENT 'colombian pesos',
   `preview` NVARCHAR(255) NOT NULL COMMENT 'Link to a pdf with the book preview',
   `quantity` INT NOT NULL DEFAULT 1,
