@@ -1,0 +1,23 @@
+# the composer package lock file and install directory
+/composer.*
+/fuel/vendor
+
+# any of the fuel packages installed by default
+/fuel/core/
+/fuel/packages/auth/
+/fuel/packages/email/
+/fuel/packages/oil/
+/fuel/packages/orm/
+/fuel/packages/parser/
+/oil
+
+# all in app folder, except for subfolders classes, config and view
+/fuel/app/*
+!/fuel/app/classes
+!/fuel/app/config
+!/fuel/app/views
+
+# dynamically generated files
+/fuel/app/logs/*/*/*
+/fuel/app/cache/*/*
+/fuel/app/config/crypt.php
