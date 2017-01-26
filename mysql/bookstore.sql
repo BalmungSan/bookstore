@@ -44,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` NVARCHAR(50) NOT NULL,
   `city_id` INT NOT NULL,
   `address` NVARCHAR(50) NOT NULL COMMENT 'the address where the user wants to receive the books he buys',
-  `balance` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
   UNIQUE INDEX `user_email_UNIQUE` (`email` ASC),
@@ -100,36 +99,6 @@ CREATE TABLE IF NOT EXISTS `books` (
   CONSTRAINT `fk_books_categories`
     FOREIGN KEY (`category_id`)
     REFERENCES `categories` (`category_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-DEFAULT CHARACTER SET utf8
-COLLATE utf8_general_ci
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `sales`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sales`;
-CREATE TABLE IF NOT EXISTS `sales` (
-  `sales_id` INT NOT NULL AUTO_INCREMENT,
-  `book_id` INT NOT NULL,
-  `book_user_id` INT NOT NULL COMMENT 'user who sells the book',
-  `user_id` INT NOT NULL COMMENT 'user who buys the book',
-  `units` INT NOT NULL DEFAULT 1 COMMENT 'the number of units of the book that were bought',
-  `sale_date` DATE NOT NULL,
-  `sale_total` INT NULL COMMENT 'the total price of the sale',
-  PRIMARY KEY (`sales_id`, `book_id`, `book_user_id`, `user_id`),
-  UNIQUE INDEX `sales_id_UNIQUE` (`sales_id` ASC),
-  INDEX `fk_sales_books_idx` (`book_id` ASC, `book_user_id` ASC),
-  INDEX `fk_sales_users_idx` (`user_id` ASC),
-  CONSTRAINT `fk_sales_books`
-    FOREIGN KEY (`book_id` , `book_user_id`)
-    REFERENCES `books` (`book_id` , `user_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_sales_users`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `users` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 DEFAULT CHARACTER SET utf8
