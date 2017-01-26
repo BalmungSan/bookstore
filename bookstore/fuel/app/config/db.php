@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016 Sharedbooks
+ * Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,11 @@ return array (
 	'dev' => array(
 	    'type'           => 'mysqli',
 	    'connection'     => array(
-	        'hostname'       => 'localhost',
-	        'port'           => '3306',
-	        'database'       => 'sharedbooks',
-	        'username'       => 'sharedbooks',
-	        'password'       => 'sharedbooks',
+	        'hostname'       => getenv('MYSQL_HOST'),
+	        'port'           => getenv('MYSQL_PORT'),
+	        'database'       => 'bookstore',
+	        'username'       => 'bookstore',
+	        'password'       => 'bookstore',
 	        'persistent'     => true,
 	        'compress'       => true,
 	    ),
