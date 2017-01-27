@@ -65,9 +65,9 @@
     public function setName($name) {
       $this->name = $name;
     }
-
-    public function setProfileImg($profileImg) {
-      $this->profileImg = $profileImg;
+	
+	public function getName() {
+      return $this->name;
     }
 
     public function getCity() {
