@@ -81,7 +81,7 @@
       $colums = array(
         "email",
         "password",
-        "real_name",
+        "name",
         "city_id",
         "address"
       );

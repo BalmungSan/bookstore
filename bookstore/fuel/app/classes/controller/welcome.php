@@ -63,15 +63,19 @@
         echo '<script language="javascript">';
         echo 'alert("Sorry, passwords does not match")';
         echo '</script>';
-        Response::redirect_back('/', 'refresh');
+        Response::redirect('/#toregister', 'refresh');
       }
 	  
 	  //try to register the user in the database
       try{
         $result = UserModel::registerUser($user, $password1);
+		//if works login the new user
 		echo '<script>alert("Congratulations, you have a new account");</script>';
-        Response::redirect('welcome', 'refresh');
+        Session::create();
+        Session::set('userInfo', $user);
+        Response::redirect('store', 'location');
       }catch(Exception $e){
+		//if something fail, print an error message
         echo '<script language="javascript">';
         echo 'alert("Sorry, email already exists")';
         echo '</script>';
