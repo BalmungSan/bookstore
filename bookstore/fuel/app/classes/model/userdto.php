@@ -1,6 +1,6 @@
 <?php
   /**
-   * Copyright 2016 SharedBooks
+   * Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@
     //data
     private $id;
     private $email;
-    private $profileImg;
     private $name;
     private $city;
     private $address;
@@ -40,10 +39,9 @@
     public function fill($data) {
       $this->id         = $data[0];
       $this->email      = $data[1];
-      $this->profileImg = $data[2];
-      $this->name       = $data[3];
-      $this->city       = $data[4];
-      $this->address    = $data[5];
+      $this->name       = $data[2];
+      $this->city       = $data[3];
+      $this->address    = $data[4];
       return $this;
     }
 
@@ -62,14 +60,6 @@
 
     public function setEmail($email) {
       $this->email = $email;
-    }
-
-    public function getProfileImg() {
-      return $this->profileImg;
-    }
-
-    public function getName() {
-      return $this->name;
     }
 
     public function setName($name) {
@@ -102,12 +92,11 @@
      */
     public function toArray() {
       return array(
-        $this->id,
-        $this->email,
-        $this->profileImg,
-        $this->name,
-        $this->city,
-        $this->address
+        'id' => $this->id,
+        'email' => $this->email,
+        'name' => $this->name,
+        'city' => $this->city,
+        'address' => $this->address
       );
     }
   }

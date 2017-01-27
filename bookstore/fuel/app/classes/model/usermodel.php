@@ -1,6 +1,6 @@
 <?php
   /**
-   * Copyright 2016 SharedBooks
+   * Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -55,7 +55,6 @@
       $user->setId($result->get('user_id'));
       $user->setEmail($result->get('email'));
       $user->setName($result->get('real_name'));
-      $user->setProfileImg($result->get('profile_img'));
       $user->setAddress($result->get('address'));
       $user->setCity($city->get('city'));
 
@@ -82,7 +81,6 @@
       $colums = array(
         "email",
         "password",
-        "profile_img",
         "real_name",
         "city_id",
         "address"
@@ -90,7 +88,6 @@
       $values = array(
         $user->getEmail(),
         $pass,
-        $user->getProfileImg(),
         $user->getName(),
         $city->get('city_id'),
         $user->getAddress()
@@ -151,7 +148,6 @@
 
       //prepare the columns an values
       $set = array(
-        'profile_img' => $user->getProfileImg(),
         'city_id' => $city->get('city_id'),
         'real_name' => $user->getName(),
         'address' => $user->getAddress()
