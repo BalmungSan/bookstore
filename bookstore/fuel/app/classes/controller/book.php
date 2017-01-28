@@ -40,7 +40,7 @@
       }
 
 	  $view = View::forge('book/create');
-      $view->categories = BookModel::getCategories();
+      $view->data = array('categories' => BookModel::getCategories());
 	  return $view;
 	}
 	
@@ -100,8 +100,7 @@
 	  //paint the edit view
 	  $book = BookModel::getBook($bookId)->toArray();
 	  $view = View::forge('book/edit');
-	  $view->categories = BookModel::getCategories();
-	  $view->book = $book;
+	  $view->data = array('categories' => BookModel::getCategories(), 'book' => $book);
 	  return $view;
 	}
 

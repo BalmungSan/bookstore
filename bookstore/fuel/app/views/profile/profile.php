@@ -54,7 +54,6 @@
 					<h3>My Books</h3>
 					<ul>
 						<?php
-                        $books = Session::get('myBooks');
 						foreach ($books as $book) {
 						?>
 						<li>
