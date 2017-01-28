@@ -1,6 +1,6 @@
 <?php
   /**
-   * Copyright 2016 SharedBooks
+   * Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -45,12 +45,9 @@
       $book->setAuthor($data->get('author'));
       $book->setIsNew($data->get('is_new'));
       $book->setCategory($data->get('category'));
-      $book->setImg($data->get('img'));
       $book->setPrice($data->get('price'));
       $book->setPreview($data->get('preview'));
       $book->setQuantity($data->get('quantity'));
-      $book->setRateSum($data->get('rate_sum'));
-      $book->setRateCount($data->get('rate_count'));
 
       return $book;
     }
@@ -73,10 +70,7 @@
         'author',
         'is_new',
         'category_id',
-        'img',
         'price',
-        'preview',
-        'quantity'
       );
 
       $values = array(
@@ -85,7 +79,6 @@
         $book->getAuthor(),
         $book->getIsNew(),
         $category->get('category_id'),
-        $book->getImg(),
         $book->getPrice(),
         $book->getPreview(),
         $book->getQuantity()
@@ -110,7 +103,6 @@
      * @return 1 if at least one field is changed, else 0
      * @see BookDTO
      */
-
     public static function updateBook($book) {
       //get the category id for the book's category
       $category = DB::select('category_id')->from('categories')->where('category', '=', $book->getCategory())->execute();
@@ -121,7 +113,6 @@
         'author' => $book->getAuthor(),
         'is_new' => $book->getIsNew(),
         'category_id' => $category->get('category_id'),
-        'img' => $book->getImg(),
         'price' => $book->getPrice(),
         'preview' => $book->getPreview(),
         'quantity' => $book->getQuantity()
@@ -155,14 +146,11 @@
         $data[]  = $book['user_id'];
         $data[]  = $book['name'];
         $data[]  = $book['author'];
-        $data[]  = $book['is_new'];
         $data[]  = $book['category'];
         $data[]  = $book['img'];
         $data[]  = $book['price'];
         $data[]  = $book['preview'];
         $data[]  = $book['quantity'];
-        $data[]  = $book['rate_sum'];
-        $data[]  = $book['rate_count'];
         $books[] = (new BookDTO())->fill($data);
       }
 
@@ -257,12 +245,10 @@
       $query = DB::select()->from('books')->join('categories')->on('books.category_id', '=', 'categories.category_id');
 
       //add the lower bound
-      if ($lower > 0)
-        $query = $query->where('price', '>=', $lower);
+      if ($lower > 0) $query = $query->where('price', '>=', $lower);
 
       //add the upper bound
-      if ($upper > 0 && $upper >= $lower)
-        $query = $query->where('price', '<=', $upper);
+      if ($upper > 0 && $upper >= $lower) $query = $query->where('price', '<=', $upper);
 
       //get the books
       $result = $query->execute();

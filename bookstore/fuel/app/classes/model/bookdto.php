@@ -1,6 +1,6 @@
 <?php
   /**
-   * Copyright 2016 SharedBooks
+   * Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -31,12 +31,9 @@
     private $author;    //3
     private $isNew;     //4
     private $category;  //5
-    private $img;       //6
-    private $price;     //7
-    private $preview;   //8
-    private $quantity;  //9
-    private $rateSum;   //10
-    private $rateCount; //11
+    private $price;     //6
+    private $preview;   //7
+    private $quantity;  //8
 
     /**
      * Fill all fields of this BookDTO
@@ -50,12 +47,9 @@
       $this->author    = $data[3];
       $this->isNew     = $data[4];
       $this->category  = $data[5];
-      $this->img       = $data[6];
-      $this->price     = $data[7];
-      $this->preview   = $data[8];
-      $this->quantity  = $data[9];
-      $this->rateSum   = $data[10];
-      $this->rateCount = $data[11];
+      $this->price     = $data[6];
+      $this->preview   = $data[7];
+      $this->quantity  = $data[8];
       return $this;
     }
 
@@ -108,14 +102,6 @@
       $this->category = $category;
     }
 
-    public function getImg() {
-      return $this->img;
-    }
-
-    public function setImg($img) {
-      $this->img = $img;
-    }
-
     public function getPrice() {
       return $this->price;
     }
@@ -140,40 +126,21 @@
       $this->quantity = $quantity;
     }
 
-    public function getRateSum() {
-      return $this->rateSum;
-    }
-
-    public function setRateSum($rateSum) {
-      $this->rateSum = $rateSum;
-    }
-
-    public function getRateCount() {
-      return $this->rateCount;
-    }
-
-    public function setRateCount($rateCount) {
-      $this->rateCount = $rateCount;
-    }
-
     /**
      * Transforms this book to an array
      * @return an array with all the data of this book
      */
     public function toArray() {
       return array(
-        $this->id,
-        $this->user,
-        $this->name,
-        $this->author,
-        $this->isNew,
-        $this->category,
-        $this->img,
-        $this->price,
-        $this->preview,
-        $this->quantity,
-        $this->rateSum,
-        $this->rateCount
+        'id' => $this->id,
+        'user' => $this->user,
+        'name' => $this->name,
+        'author' => $this->author,
+        'isNew' => $this->isNew,
+        'category' => $this->category,
+        'price' => $this->price,
+        'preview' => $this->preview,
+        'quantity' => $this->quantity,
       );
     }
   }
