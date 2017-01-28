@@ -85,7 +85,7 @@
 
 	  //tell the user the add book worked
 	  echo '<script>alert("New Book added");</script>';
-	  Response::redirect('store', 'refresh');
+	  Response::redirect('profile', 'refresh');
 	}
 
     /**
@@ -149,7 +149,7 @@
 
 	  //tell the user the edit book worked
 	  echo '<script>alert("Book edited");</script>';
-	  Response::redirect('store', 'refresh');
+	  Response::redirect('profile', 'refresh');
 	}
 
     /**
