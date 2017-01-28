@@ -18,7 +18,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>E-Store Modules | SharedBooks</title>
+<title>E-BookStore</title>
 <meta charset="utf-8">
 
 <!-- Linking styles -->
@@ -59,18 +59,17 @@
 						?>
 						<li>
 							<div class="well" id="book">
-								<div class="img"><a href="books/<?=$book[8]?>" target="_blank"><img alt="" src="data:image/jpg;base64,<?=base64_encode($book[6])?>"/></a></div>
 								<div class="info">
 									<a class="title"><?=utf8_encode($book[2])?></a>
 									<div id="info<?=$book[0]?>">
-										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Author: </span><strong><?=$book[3]?></strong></p>
-										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Category: </span><strong><?=$book[5]?></strong></p>
-										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Units: </span><strong><?=$book[9]?></strong></p>
-										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Our price: </span><strong>$<?=$book[7]?></strong></p>
+										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Author: </span><strong><?=$book['author']?></strong></p>
+										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Category: </span><strong><?=$book['category']?></strong></p>
+										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Units: </span><strong><?=$book['units']?></strong></p>
+										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Price: </span><strong>$<?=$book['price']?></strong></p>
 									</div>
 									<div class="actions">
-										<button type="button" class="btn btn-info details" onclick="window.location.href='store/editBook/<?=$book[0]?>';"><strong>Edit</strong></button>
-										<button type="button" class="btn btn btn-danger" onclick="window.location.href='store/deleteBook/<?=$book[0]?>';"><strong>Delete</strong></button>
+										<button type="button" class="btn btn-info details" onclick="window.location.href='store/editBook/<?=$book['id']?>';"><strong>Edit</strong></button>
+										<button type="button" class="btn btn btn-danger" onclick="window.location.href='store/deleteBook/<?=$book['id']?>';"><strong>Delete</strong></button>
 									</div>
 								</div>
 							</div>
@@ -114,7 +113,7 @@
 		</div>
 		<footer><!-- Defining the footer section of the page -->
 			<div id="privacy">
-				SharedBooks © 2016
+				BookStore © 2017
 			</div>
 		</footer>
 	</div>

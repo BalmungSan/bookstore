@@ -19,7 +19,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Login and Registration SharedBooks</title>
+    <title>Login and Registration BookStore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
@@ -33,7 +33,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Login and Sign up<span> Shared Books</span></h1>
+            <h1>Login and Sign up<span> BookStore</span></h1>
         </header>
 
         <section>
