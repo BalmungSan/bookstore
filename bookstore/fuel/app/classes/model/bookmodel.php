@@ -149,7 +149,6 @@
         $data[]  = $book['name'];
         $data[]  = $book['author'];
         $data[]  = $book['category'];
-        $data[]  = $book['img'];
         $data[]  = $book['price'];
         $data[]  = $book['preview'];
         $data[]  = $book['quantity'];
