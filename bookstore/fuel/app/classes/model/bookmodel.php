@@ -71,6 +71,8 @@
         'is_new',
         'category_id',
         'price',
+		'preview',
+		'quantity'
       );
 
       $values = array(
