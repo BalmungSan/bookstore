@@ -2,7 +2,7 @@
 FROM eboraas/apache-php
 
 #Updating the image and installing some utilities
-RUN apt-get -y update && apt-get upgrade && apt-get install -y wget unzip vim tree git
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y wget unzip vim tree git
 
 #Editing apache2 config
 ADD apache2.conf /etc/apache2/apache2.conf

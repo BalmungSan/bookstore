@@ -2,7 +2,7 @@
 FROM mysql
 
 #Updating the image
-RUN apt-get -y update && apt-get upgrade
+RUN apt-get -y update && apt-get -y upgrade
 
 #Adding bookstore's mysql files
 ADD bookstore.sql /home/bookstore/bookstore.sql
