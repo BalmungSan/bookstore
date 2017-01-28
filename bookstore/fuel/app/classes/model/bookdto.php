@@ -33,7 +33,7 @@
     private $category;  //5
     private $price;     //6
     private $preview;   //7
-    private $quantity;  //8
+    private $units;  //8
 
     /**
      * Fill all fields of this BookDTO
@@ -49,7 +49,7 @@
       $this->category  = $data[5];
       $this->price     = $data[6];
       $this->preview   = $data[7];
-      $this->quantity  = $data[8];
+      $this->units     = $data[8];
       return $this;
     }
 
@@ -118,12 +118,12 @@
       $this->preview = $preview;
     }
 
-    public function getQuantity() {
-      return $this->quantity;
+    public function getUnits() {
+      return $this->units;
     }
 
-    public function setQuantity($quantity) {
-      $this->quantity = $quantity;
+    public function setUnits($units) {
+      $this->units = $units;
     }
 
     /**
@@ -140,7 +140,7 @@
         'category' => $this->category,
         'price' => $this->price,
         'preview' => $this->preview,
-        'quantity' => $this->quantity,
+        'units' => $this->units,
       );
     }
   }

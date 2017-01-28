@@ -80,7 +80,7 @@
 	  $book->setCategory(Input::post('categorynewbook'));
 	  $book->setPrice(Input::post('pricenewbook'));
 	  $book->setPreview($preview);
-	  $book->setQuantity(Input::post('unitsnewbook'));
+	  $book->setUnits(Input::post('unitsnewbook'));
 	  $result = BookModel::registerBook($book);
 
 	  //tell the user the add book worked
@@ -144,7 +144,7 @@
 	  $book->setCategory(Input::post('categorynewbook'));
 	  $book->setPrice(Input::post('pricenewbook'));
 	  $book->setPreview($preview);
-	  $book->setQuantity(Input::post('unitsnewbook'));
+	  $book->setUnits(Input::post('unitsnewbook'));
 	  $result = BookModel::updateBook($book);
 
 	  //tell the user the edit book worked

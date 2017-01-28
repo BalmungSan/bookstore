@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `books` (
   `category_id` INT NOT NULL,
   `price` INT NOT NULL DEFAULT 0 COMMENT 'colombian pesos',
   `preview` NVARCHAR(255) NOT NULL COMMENT 'Link to a pdf with the book preview',
-  `quantity` INT NOT NULL DEFAULT 1,
+  `units` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`book_id`, `user_id`),
   UNIQUE INDEX `book_id_UNIQUE` (`book_id` ASC),
   INDEX `fk_books_users_idx` (`user_id` ASC),

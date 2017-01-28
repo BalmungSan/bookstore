@@ -47,7 +47,7 @@
       $book->setCategory($data->get('category'));
       $book->setPrice($data->get('price'));
       $book->setPreview($data->get('preview'));
-      $book->setQuantity($data->get('quantity'));
+      $book->setUnits($data->get('units'));
 
       return $book;
     }
@@ -72,7 +72,7 @@
         'category_id',
         'price',
 		'preview',
-		'quantity'
+		'units'
       );
 
       $values = array(
@@ -83,7 +83,7 @@
         $category->get('category_id'),
         $book->getPrice(),
         $book->getPreview(),
-        $book->getQuantity()
+        $book->getUnits()
       );
 
 
@@ -117,7 +117,7 @@
         'category_id' => $category->get('category_id'),
         'price' => $book->getPrice(),
         'preview' => $book->getPreview(),
-        'quantity' => $book->getQuantity()
+        'units' => $book->getUnits()
       );
 
       //update the data
@@ -152,7 +152,7 @@
         $data[]  = $book['category'];
         $data[]  = $book['price'];
         $data[]  = $book['preview'];
-        $data[]  = $book['quantity'];
+        $data[]  = $book['units'];
         $books[] = (new BookDTO())->fill($data);
       }
 
