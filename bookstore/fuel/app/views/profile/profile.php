@@ -59,8 +59,8 @@
 						<li>
 							<div class="well" id="book">
 								<div class="info">
-									<a class="title"><?=utf8_encode($book[2])?></a>
-									<div id="info<?=$book[0]?>">
+									<a class="title"><?=utf8_encode($book['name'])?></a>
+									<div id="info<?=$book['id']?>">
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Author: </span><strong><?=$book['author']?></strong></p>
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Category: </span><strong><?=$book['category']?></strong></p>
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Units: </span><strong><?=$book['units']?></strong></p>
