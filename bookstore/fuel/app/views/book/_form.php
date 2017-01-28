@@ -23,7 +23,7 @@
   //name
   echo '<p>';
     echo Form::label('Name ', 'namenewbook', array('class' =>'uname', 'data-icon' => 'b'));
-    echo Form::input('namenewbook', isset($book) ? $book[2] : '', array('required' => 'required', 'type' => 'text', 'placeholder'=>'SpeakOut Upper Intermediate'));
+    echo Form::input('namenewbook', isset($book) ? $book['name'] : '', array('required' => 'required', 'type' => 'text', 'placeholder'=>'SpeakOut Upper Intermediate'));
   echo '</p>';
 
   //category
@@ -31,35 +31,35 @@
   echo '<p>';
     echo Form::label('Category', 'categorynewbook', array('class'=>'uname', 'data-icon'=>'c'));
     echo '<br>';
-    echo Form::select('categorynewbook', isset($book) ? $book[5] : 'Arts & Photography', array_combine($categories, $categories), array('id' => 'citysignup'));
+    echo Form::select('categorynewbook', isset($book) ? $book['category'] : 'Arts & Photography', array_combine($categories, $categories), array('id' => 'citysignup'));
   echo '</p>';
 
   //author
   echo '<p>';
     echo Form::label('Author', 'authornewbook', array('class'=>'uname', 'data-icon'=>'u'));
-    echo Form::input('authornewbook', isset($book) ? $book[3] : '', array('required'=>'required','pattern'=>'[a-zA-Z _-]+$', 'type'=>'text', 'placeholder'=>'France Eales'));
+    echo Form::input('authornewbook', isset($book) ? $book['author'] : '', array('required'=>'required','pattern'=>'[a-zA-Z _-]+$', 'type'=>'text', 'placeholder'=>'France Eales'));
   echo '</p>';
 
   //price
   echo '<p>';
     echo Form::label('Price', 'pricenewbook', array('class'=>'uname', 'data-icon'=>'d'));
-    echo Form::input('pricenewbook', isset($book) ? $book[7] : '', array('required'=>'required', 'required pattern'=>'[0-9]', 'type'=>'number', 'placeholder'=>'160.000'));
+    echo Form::input('pricenewbook', isset($book) ? $book['price'] : '', array('required'=>'required', 'required pattern'=>'[0-9]', 'type'=>'number', 'placeholder'=>'160.000'));
   echo '</p>';
 
   //units
   echo '<p>';
     echo Form::label('Units', 'unitsnewbook', array('class'=>'uname', 'data-icon'=>'n'));
-    echo Form::input('unitsnewbook', isset($book) ? $book[9] : '', array('required'=>'required', 'pattern'=>'[0-9]', 'type' =>'number', 'placeholder'=>'4'));
+    echo Form::input('unitsnewbook', isset($book) ? $book['units'] : '', array('required'=>'required', 'pattern'=>'[0-9]', 'type' =>'number', 'placeholder'=>'4'));
   echo '</p>';
 
   //is new
   echo '<P>';
     echo Form::label('Is New?', 'isnewnewbook', array('class'=>'uname'));
     echo '<P>';
-      echo Form::radio('isNew', '1', isset($book) && !$book[4] ? false : true);
+      echo Form::radio('isNew', '1', isset($book) && !$book['isNew'] ? false : true);
       echo Form::label(' New ', 'isNew');
       echo '<br>';
-      echo Form::radio('isNew', '0', isset($book) && !$book[4] ? true : false);
+      echo Form::radio('isNew', '0', isset($book) && !$book['isNew'] ? true : false);
       echo Form::label(' Second Hand ', 'isNew');
     echo '</p>';
   echo '</P>';
