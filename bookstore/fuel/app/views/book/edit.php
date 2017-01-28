@@ -20,7 +20,7 @@
 </html>
 <head>
     <meta charset="UTF-8" />
-    <title>Edit a book SharedBooks</title>
+    <title>Edit a book BookStore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/style_login.css" />
@@ -32,7 +32,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Shared Books</h1>
+            <h1>BookStore</h1>
         </header>
         <div id="container_demo" >
             <div id="wrapper">

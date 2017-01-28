@@ -72,7 +72,7 @@
 
   //back & submit
   echo '<p>';
-    echo Form::button('back', 'Back', array('id'=>'back-button', 'onclick' => 'window.location.href=\'/store\';'));
+    echo Form::button('back', 'Back', array('id'=>'back-button', 'onclick' => 'window.location.href=\'/profile\';'));
     echo '<p class=\'signin button\'>';
       echo Form::submit('submit', 'OK');
     echo '</p>';

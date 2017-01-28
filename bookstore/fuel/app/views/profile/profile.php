@@ -39,7 +39,7 @@
 		<header><!-- Defining the header section of the page -->
 			<div class="top_head"><!-- Defining the top head element -->
 				<div id="salir">
-					<button type="button" class="btn btn-danger" onclick="window.location.href='store/logOut';"><strong>Log Out</strong></button>
+					<button type="button" class="btn btn-danger" onclick="window.location.href='profile/logOut';"><strong>Log Out</strong></button>
 				</div>
 
 				<div class="logo"><!-- Defining the logo element -->
@@ -67,8 +67,8 @@
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Price: </span><strong>$<?=$book['price']?></strong></p>
 									</div>
 									<div class="actions">
-										<button type="button" class="btn btn-info details" onclick="window.location.href='store/editBook/<?=$book['id']?>';"><strong>Edit</strong></button>
-										<button type="button" class="btn btn btn-danger" onclick="window.location.href='store/deleteBook/<?=$book['id']?>';"><strong>Delete</strong></button>
+										<button type="button" class="btn btn-info details" onclick="window.location.href='profile/editBook/<?=$book['id']?>';"><strong>Edit</strong></button>
+										<button type="button" class="btn btn btn-danger" onclick="window.location.href='profile/deleteBook/<?=$book['id']?>';"><strong>Delete</strong></button>
 									</div>
 								</div>
 							</div>
@@ -81,7 +81,7 @@
 				</div>
 				<div id="rightUpper">
 					<h3>Search By:</h3>
-					<form id="search_form" method="post" name="search_form" autocomplete="on" action="store/search">
+					<form id="search_form" method="post" name="search_form" autocomplete="on" action="profile/search">
 						<input id="r2" type="radio" name="radioButton" value=2 onclick="search()" checked> Name<br>
 					  		<input id="name" name="name" class="form-control" placeholder="Las Mil y una Noches" style="display: block;"/>
 					  	<input id="r0" type="radio" name="radioButton" value=0 onclick="search()"> Category<br>
