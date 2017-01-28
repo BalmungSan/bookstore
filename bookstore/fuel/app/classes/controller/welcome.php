@@ -73,7 +73,9 @@
       try{
         $result = UserModel::registerUser($user, $password1);
 		//if works login the new user
-		echo '<script>alert("Congratulations, you have a new account");</script>';
+		echo '<script language="javascript">';
+		echo 'alert("Congratulations, you have a new account")';
+		echo '</script>';
         Session::create();
         Session::set('userInfo', $user);
         Response::redirect('profile', 'location');
