@@ -29,18 +29,21 @@
    */
   class Controller_Welcome extends Controller {
     /**
-     * The basic welcome message
+     * The index page
      * @access  public
      * @return  Response
      */
     public function action_index() {
+	  //check if the user is logged
       if(!$user = Session::get('userInfo')){
+		//if not, load the loggin function 
         $view = View::forge('welcome/index');
         $view->cities = UserModel::getCities();
         return $view;
       }
 
-      Response::redirect('store','location');
+	  //if yes go to the profile page
+      Response::redirect('profile','location');
     }
 
 	/**
@@ -73,7 +76,7 @@
 		echo '<script>alert("Congratulations, you have a new account");</script>';
         Session::create();
         Session::set('userInfo', $user);
-        Response::redirect('store', 'location');
+        Response::redirect('profile', 'location');
       }catch(Exception $e){
 		//if something fail, print an error message
         echo '<script language="javascript">';
@@ -106,7 +109,7 @@
 		//if they are login the user
         Session::create();
         Session::set('userInfo', $userResult);
-        Response::redirect('store', 'location');
+        Response::redirect('profile', 'location');
       }
     }
 

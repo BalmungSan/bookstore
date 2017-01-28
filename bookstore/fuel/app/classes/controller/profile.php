@@ -20,14 +20,14 @@
   use \Model\BookDTO;
 
   /**
-   * The Store Controller.
+   * The Profile Controller.
    *
    * The main page of the application
    *
    * @package  app
    * @extends  Controller
    */
-  class Controller_Store extends Controller {
+  class Controller_Profile extends Controller {
     /**
      * The profile page
      * @access  public

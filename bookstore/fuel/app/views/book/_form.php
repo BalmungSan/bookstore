@@ -1,6 +1,6 @@
 <?php
   /**
-   * Copyright 2016 SharedBooks
+   * Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
    * See the License for the specific language governing permissions and
    * limitations under the License.
    */
+   
   /**
    * Add and edit book form
    */
-
   echo Form::open(array('method' => 'post', 'autocomplete' => 'on', 'id' => 'form_id', 'enctype' => 'multipart/form-data'));
 
   //name
@@ -63,12 +63,6 @@
       echo Form::label(' Second Hand ', 'isNew');
     echo '</p>';
   echo '</P>';
-
-  //img
-  echo '<p>';
-    echo Form::label('Image', 'imagenewbook', array('class'=>'uname', 'data-icon' => 'i'));
-    echo Form::file('imagenewbook',  array('size'=>'150', 'required'=>'required'));
-  echo '</p>';
 
   //preview
   echo '<p>';
