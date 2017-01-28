@@ -85,8 +85,6 @@ CREATE TABLE IF NOT EXISTS `books` (
   `price` INT NOT NULL DEFAULT 0 COMMENT 'colombian pesos',
   `preview` NVARCHAR(255) NOT NULL COMMENT 'Link to a pdf with the book preview',
   `quantity` INT NOT NULL DEFAULT 1,
-  `rate_sum` INT NOT NULL DEFAULT 0 COMMENT 'the sum of all the ratings that users have given this book',
-  `rate_count` INT NOT NULL DEFAULT 0 COMMENT 'the number of users who have rated this book',
   PRIMARY KEY (`book_id`, `user_id`),
   UNIQUE INDEX `book_id_UNIQUE` (`book_id` ASC),
   INDEX `fk_books_users_idx` (`user_id` ASC),
