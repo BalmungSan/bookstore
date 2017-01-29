@@ -37,3 +37,4 @@ return array (
 	    'readonly'       => false,
 	),
 );
+?>

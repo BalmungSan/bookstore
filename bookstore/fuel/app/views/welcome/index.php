@@ -1,5 +1,7 @@
+<!DOCTYPE html>
+
 <!--
-  Copyright 2016 SharedBooks
+  Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,7 +16,6 @@
   limitations under the License.
 -->
 
-<!DOCTYPE html>
 <html lang="es" class="no-js">
 
 <head>

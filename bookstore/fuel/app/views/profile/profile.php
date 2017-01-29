@@ -14,11 +14,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
+
 <html lang="es">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>E-BookStore</title>
+<title>BookStore</title>
 <meta charset="utf-8">
 
 <!-- Linking styles -->
