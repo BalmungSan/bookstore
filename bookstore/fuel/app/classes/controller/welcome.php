@@ -71,14 +71,21 @@
 	  
 	  //try to register the user in the database
       try{
-        $result = UserModel::registerUser($user, $password1);
-		//if works login the new user
-		echo '<script language="javascript">';
-		echo 'alert("Congratulations, you have a new account")';
-		echo '</script>';
-        Session::create();
-        Session::set('userInfo', $user);
-        Response::redirect('profile', 'location');
+        if (UserModel::registerUser($user, $password1) == 1) {
+		  //if works login the new user
+		  Session::create();
+          Session::set('userInfo', $user);
+		  echo '<script language="javascript">';
+		  echo 'alert("Congratulations, you have a new account")';
+		  echo '</script>';
+          Response::redirect('profile', 'location');
+		} else {
+		  //if not print an error message
+		  echo '<script language="javascript">';
+          echo 'alert("Sorry, there was a problem. Please try again later")';
+          echo '</script>';
+          Response::redirect('/#toregister', 'refresh');
+		}
       }catch(Exception $e){
 		//if something fail, print an error message
         echo '<script language="javascript">';

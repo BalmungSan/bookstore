@@ -91,8 +91,8 @@
       $result = DB::insert('books')->columns($colums)->values($values)->execute();
 
       //check if the insert succeed
-      if (count($result) == 1) {
-        $book->setId($result[1]);
+      if ($result[1] == 1) {
+        $book->setId($result[0]);
         return 1;
       } else {
         return 0;
@@ -121,7 +121,7 @@
       );
 
       //update the data
-      return DB::update('books')->set($set)->where('book_id', '=', $book->getId())->execute();
+      return DB::update('books')->set($set)->where('book_id', '=', $book->getId())->execute()[1];
     }
 
     /**

@@ -70,7 +70,7 @@
 	    $preview = Upload::get_files()[0]['saved_as'];
       }
 
-	  //save the book
+	  //set the book data
 	  $user = Session::get('userInfo');
 	  $book = new BookDTO();
 	  $book->setUser($user->getId());
@@ -81,11 +81,19 @@
 	  $book->setPrice(Input::post('pricenewbook'));
 	  $book->setPreview($preview);
 	  $book->setUnits(Input::post('unitsnewbook'));
-	  $result = BookModel::registerBook($book);
-
-	  //tell the user the add book worked
-	  echo '<script>alert("New Book added");</script>';
-	  Response::redirect('profile', 'refresh');
+	  
+	  //try to save the book
+	  if (BookModel::registerBook($book) == 1) {
+	    //if works, tell the user the add book worked
+	    echo '<script>alert("New Book added");</script>';
+	    Response::redirect('profile', 'refresh');
+	  } else {
+		//if not print an error message
+		echo '<script language="javascript">';
+        echo 'alert("Sorry, there was a problem. Please try again later")';
+        echo '</script>';
+        Response::redirect('/book/create', 'refresh');
+	  }
 	}
 
     /**
@@ -137,7 +145,7 @@
       $book = BookModel::getBook($bookId);
       File::delete("books/".$book->getPreview());
 
-	  //update the book
+	  //set the book data
 	  $book->setName(Input::post('namenewbook'));
 	  $book->setAuthor(Input::post('authornewbook'));
 	  $book->setIsNew(Input::post('isNew'));
@@ -145,11 +153,19 @@
 	  $book->setPrice(Input::post('pricenewbook'));
 	  $book->setPreview($preview);
 	  $book->setUnits(Input::post('unitsnewbook'));
-	  $result = BookModel::updateBook($book);
-
-	  //tell the user the edit book worked
-	  echo '<script>alert("Book edited");</script>';
-	  Response::redirect('profile', 'refresh');
+	  
+	  //try to update the book
+	  if (BookModel::updateBook($book) == 1) {
+	    //if works tell the user the edit book worked
+	    echo '<script>alert("Book edited");</script>';
+	    Response::redirect('profile', 'refresh');
+	  } else {
+		//if not print an error message
+		echo '<script language="javascript">';
+        echo 'alert("Sorry, there was a problem. Please try again later")';
+        echo '</script>';
+        Response::redirect('/book/edit', 'refresh');
+	  }
 	}
 
     /**

@@ -97,8 +97,8 @@
       $result = DB::insert('users')->columns($colums)->values($values)->execute();
 
       //check if the insert succeed
-      if (count($result) == 1) {
-        $user->setId($result[1]);
+      if ($result[1] == 1) {
+        $user->setId($result[0]);
         return 1;
       } else {
         return 0;
