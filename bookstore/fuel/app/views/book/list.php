@@ -35,8 +35,8 @@
 					<td>
 						<div class="btn-toolbar">
 							<div class="btn-group">
-								<?php echo Html::anchor('book/view/'.$book['id'], '<i class="icon-wrench"></i> View', array('class' => 'btn btn-default btn-sm')); ?>
-								<?php echo Html::anchor('book/buy/'.$book['id'], '<i class="icon-eye-open"></i> Buy', array('class' => 'btn btn-success btn-sm')); ?>
+								<?php echo Html::anchor('books/'.$book['preview'], 'View', array('class' => 'btn btn-default btn-sm', 'target' => '_blank')); ?>
+								<?php echo Html::anchor('book/buy/'.$book['id'], 'Buy', array('class' => 'btn btn-success btn-sm')); ?>
 							</div>
 						</div>
 

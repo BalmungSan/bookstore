@@ -200,24 +200,6 @@
 	}
 
 	/**
-     * View a book preview
-     * @access  public
-     * @return  Response
-     */
-	public function action_view($bookId = null) {
-	  //if no book id passed, return
-	  is_null($bookId) and Response::redirect('/', 'location');
-
-	  //get the book data
-	  $book = BookModel::getBook($bookId);
-	  Session::set('viewbook', $book->toArray());
-
-	  //paint the view book view
-	  $view = View::forge('book/view');
-	  return $view;
-	}
-
-	/**
      * Buy a book
 	 * @note not implemented yet, print an error message
      * @access  public
