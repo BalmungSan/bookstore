@@ -65,7 +65,7 @@
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Category: </span><strong><?=$book['category']?></strong></p>
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Units: </span><strong><?=$book['units']?></strong></p>
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Price: </span><strong>$<?=$book['price']?></strong></p>
-										<p style="font-size: 17px; margin-top: 15px;"><span class="st"><a href="books/<?=$book['preview']?>" target="_blank">Preview</a></span><strong>$<?=$book['price']?></strong></p>
+										<p style="font-size: 17px; margin-top: 15px;"><span class="st"><a href="books/<?=$book['preview']?>" target="_blank">Preview</a></span></p>
 									</div>
 									<div class="actions">
 										<button type="button" class="btn btn-info details" onclick="window.location.href='profile/editBook/<?=$book['id']?>';"><strong>Edit</strong></button>
