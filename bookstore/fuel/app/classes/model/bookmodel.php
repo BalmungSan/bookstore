@@ -121,7 +121,7 @@
       );
 
       //update the data
-      return DB::update('books')->set($set)->where('book_id', '=', $book->getId())->execute()[1];
+      return DB::update('books')->set($set)->where('book_id', '=', $book->getId())->execute();
     }
 
     /**

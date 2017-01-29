@@ -155,15 +155,14 @@
 	  $book->setUnits(Input::post('unitsnewbook'));
 	  
 	  //try to update the book
-	  if (BookModel::updateBook($book) == 1) {
+	  try {
+		BookModel::updateBook($book)
 	    //if works tell the user the edit book worked
 	    echo '<script>alert("Book edited");</script>';
 	    Response::redirect('profile', 'refresh');
-	  } else {
+	  }catch(Exception $e){
 		//if not print an error message
-		echo '<script language="javascript">';
-        echo 'alert("Sorry, there was a problem. Please try again later")';
-        echo '</script>';
+		echo '<script>alert("Sorry, there was a problem. Please try again later");</script>';
         Response::redirect('/book/edit', 'refresh');
 	  }
 	}
