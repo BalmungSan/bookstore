@@ -156,7 +156,7 @@
 	  
 	  //try to update the book
 	  try {
-		BookModel::updateBook($book)
+		BookModel::updateBook($book);
 	    //if works tell the user the edit book worked
 	    echo '<script>alert("Book edited");</script>';
 	    Response::redirect('profile', 'refresh');
