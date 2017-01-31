@@ -19,7 +19,7 @@
 -- -----------------------------------------------------
 INSERT INTO cities (city) VALUES
 ('Bogotá'), ('Medellín'), ('Cali'), ('Barranquilla'), ('Cartagena'),
-('Cúcuta'), ('Soledad'), ('Ibagué', ('Bucaramanga'), ('Soacha'),
+('Cúcuta'), ('Soledad'), ('Ibagué'), ('Bucaramanga'), ('Soacha'),
 ('Santa Marta'), ('Villavicencio'), ('Bello'), ('Pereira'), ('Valledupar'),
 ('Buenaventura'), ('Pasto'), ('Manizales'), ('Montería'), ('Neiva');
 
