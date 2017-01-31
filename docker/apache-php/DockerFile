@@ -13,10 +13,13 @@
 # limitations under the License.
 
 #Base image
-FROM eboraas/apache-php
+FROM php:5.6-apache
 
 #Updating the image and installing some utilities
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y wget unzip vim tree git
+
+#Installing mysqli for php
+docker-php-ext-install mysqli
 
 #Editing apache2 config
 ADD apache2.conf /etc/apache2/apache2.conf
