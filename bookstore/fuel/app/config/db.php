@@ -31,7 +31,7 @@ return array (
 	    ),
 	    'identifier'     => '`',
 	    'table_prefix'   => '',
-	    'charset'        => 'utf8',
+	    //'charset'        => 'utf8',
 	    'enable_cache'   => true,
 	    'profiling'      => false,
 	    'readonly'       => false,
