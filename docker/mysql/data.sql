@@ -1,5 +1,5 @@
 -- -----------------------------------------------------
--- Copyright 2017 Luis Miguel Mejía Suárez (BalmungSan)
+-- Copyright 2017 Luis Miguel MejÃ­a SuÃ¡rez (BalmungSan)
 --
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@
 -- Most important colombian cities
 -- -----------------------------------------------------
 INSERT INTO cities (city) VALUES
-('Bogotá'), ('Medellín'), ('Cali'), ('Barranquilla'), ('Cartagena'),
-('Cúcuta'), ('Soledad'), ('Ibagué'), ('Bucaramanga'), ('Soacha'),
+('BogotÃ¡'), ('MedellÃ­n'), ('Cali'), ('Barranquilla'), ('Cartagena'),
+('CÃºcuta'), ('Soledad'), ('IbaguÃ©', ('Bucaramanga'), ('Soacha'),
 ('Santa Marta'), ('Villavicencio'), ('Bello'), ('Pereira'), ('Valledupar'),
-('Buenaventura'), ('Pasto'), ('Manizales'), ('Montería'), ('Neiva');
+('Buenaventura'), ('Pasto'), ('Manizales'), ('MonterÃ­a'), ('Neiva');
 
 -- -----------------------------------------------------
 -- Most important colombian cities

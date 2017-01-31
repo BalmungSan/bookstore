@@ -4,9 +4,9 @@ A simple web app for sharing books
 The project consists of an online platform that allows the sale of new or used books among users.
 
 #Author:
- * Luis Miguel MejÌa Su·rez
+ * Luis Miguel Mej√≠a Su√°rez
 
-Universidad EAFIT - 2017 (TÛpicos Especiales en Telem·tica)
+Universidad EAFIT - 2017 (T√≥picos Especiales en Telem√°tica)
 
 #Notes:
 * This is a LAMP project
