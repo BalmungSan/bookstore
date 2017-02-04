@@ -59,7 +59,7 @@ First let's set up a traditional LAMP configuration
 	$ mysql_secure_installation //set the root password and answer yes to all questions
 	
 ### Firewall and selinux
-The simplest way to avoid connection problems is to disable the firewall and selinux, if you don't care about this the following commands will do the trick. If security is a major concern for you then its up to you to configure these services.
+The simplest way to avoid connection problems is to disable the firewall and selinux, if you don't care about this the following commands will do the trick. If security is a major concern for you then it's up to you to configure those services.
 
 	$ systemctl stop firewalld
 	$ systemctl disable firewalld
@@ -71,9 +71,9 @@ To configure the MySQL database follow the next commands
 
     $ cd docker/mysql  //go to the docker/mysql folder of this repo
 	$ mysql -u root -p //type the mysql root password
-	\> CREATE DATABASE bookstore;
-	\> GRANT ALL PRIVILEGES ON bookstore.* TO 'bookstore'@'localhost' IDENTIFIED BY 'bookstore';
-	\> FLUSH PRIVILEGES; //press ctrl + D to exit after this command
+	> CREATE DATABASE bookstore;
+	> GRANT ALL PRIVILEGES ON bookstore.* TO 'bookstore'@'localhost' IDENTIFIED BY 'bookstore';
+	> FLUSH PRIVILEGES; //press ctrl + D to exit after this command
 	$ mysql bookstore -u bookstore -pbookstore < ./bookstore.sql
 	$ mysql bookstore -u bookstore -pbookstore < ./data.sql
 	
@@ -82,13 +82,20 @@ Now we're going to configure the apache service
 
 	$ vim /etc/httpd/conf/httpd.conf //open the httpd configuration file
 	
-> _edit the __DocumentRoot__ line_
+> _edit the **DocumentRoot** line_
+>
 > DocumentRoot /var/www/bookstore/public
+>
 > _add the following lines_
+>
 > <Directory /var/www/bookstore/public>
+>
 > 	Options Indexes FollowSymLinks
+>
 > 	AllowOverride All
+>
 > 	Require all granted
+>
 > </Directory>
 	
 	$ systemctl restart httpd
