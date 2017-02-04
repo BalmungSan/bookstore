@@ -83,20 +83,20 @@ Now we're going to configure the apache service
 	$ vim /etc/httpd/conf/httpd.conf //open the httpd configuration file
 	
 > _edit the **DocumentRoot** line_
->
+
 > DocumentRoot /var/www/bookstore/public
->
+
 > _add the following lines_
->
-> <Directory /var/www/bookstore/public>
->
+
+> \<Directory /var/www/bookstore/public\>
+
 > 	Options Indexes FollowSymLinks
->
+
 > 	AllowOverride All
->
+
 > 	Require all granted
->
-> </Directory>
+
+> \</Directory\>
 	
 	$ systemctl restart httpd
 	
