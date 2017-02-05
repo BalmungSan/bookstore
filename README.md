@@ -40,7 +40,9 @@ Simply go to the docker folder and type the following commands
 
 ### note
 > Creating a subnet for docker only works when running natively. If you're running docker toolbox over virtualbox omit the subnet creation, all net and ip assignaments to containers (with the --net and --ip otions) and use the following values for these env variables
+
 > __MYSQL_HOST__=192.168.99.100 (Or whatever the default ip of your docker virtual machine)
+
 > __APACHE_HOSTS__=172.17.0.1 (Or whatever the default gateway ip of your docker virtual machine)
 
 Now you can access the application typing in a web browser the following url http://[apache ip]:[http port]/ e.g. http://203.0.113.150/
