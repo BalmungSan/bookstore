@@ -1,10 +1,12 @@
 # BookStore
-A simple web app for sharing books
+A simple Web App for sharing books
 
 The project consists of an online platform that allows the sale of new or used books among users.
 
-# Author:
+# Authors:
  * Luis Miguel Mejía Suárez
+ * Sergio Alejandro Lasso
+ * Pedro Calle Jaramillo
 
 Universidad EAFIT - 2017 (Tópicos Especiales en Telemática)
 
@@ -120,6 +122,7 @@ Now you can access the application typing in a web browser the ip of the centos 
 
 # Notes
 * This is a LAMP project
+* This is a SOA project
 * This project uses the FuelPHP Framework (http://fuelphp.com/)
 * This project runs on docker (https://www.docker.com/)
 * This project is a modification of SharedBooks (https://github.com/jocamp18/SharedBooks)
