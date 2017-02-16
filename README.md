@@ -19,7 +19,7 @@ Simply go to the docker folder and type the following commands
 
 	$ docker build -t lmejias3/mysql ./mysql
 	$ docker build -t lmejias3/apache-php ./apache-php/
-	$ docker network create --subnet=[subnet ip] --gateway=[gateway ip] [net name]
+	$ docker network create --subnet=[subnet ip] --gateway=[gateway ip] --driver=[net driver] [net name]
 	$ docker run --net [net name] --ip [mysql ip] -e MYSQL_ROOT_PASSWORD=[mysql root password] -e APACHE_HOSTS=[apache containers ips] -p [mysql port]:3306 -v [local mysql folder]:/var/lib/mysql --name [mysql container name] -d lmejias3/mysql
 	$ docker exec [mysql container name] /home/bookstore/initdb.sh
 	$ docker run --net [net name] --ip [apache ip] -e MYSQL_PORT=[mysql port] -e MYSQL_HOST=[mysql ip] -p [http port]:80 -p [https port]:443 -v [local storage folder]:/var/www/bookstore/public/books --name [apache container name] -d lmejias3/apache-php
@@ -27,6 +27,7 @@ Simply go to the docker folder and type the following commands
 ### where
 * __subnet ip:__ is the ip address of a subnet for all containers running this application. _e.g. 203.0.113.0/24_
 * __gateway ip:__ is the ip address for the default gateway of the subnet. _e.g. 203.0.113.254_
+* __net driver:__ is the network driver to use for the subnet. _e.g. bridge_
 * __net name:__ is the name given to the subnet. e.g _bookstore-net_
 * __mysql ip:__ is the ip address assigned to the mysql container. must be a valid ip address of the subnet. _e.g. 203.0.113.100_
 * __mysql root password:__ is the password associated to the root user in the mysql container. _e.g. 1234_
@@ -47,7 +48,7 @@ Simply go to the docker folder and type the following commands
 
 > __APACHE_HOSTS__=172.17.0.1 (Or whatever the default gateway ip of your docker virtual machine)
 
-Now you can access the application typing in a web browser the following url http://[apache ip]:[http port]/ e.g. http://203.0.113.150/
+Now you can access the application typing in a web browser the following url http://[host ip]:[http port]/ e.g. _http://localhost/_
 
 ## Centos 7 Server
 If you prefer to deploy the application in a centos 7 server o virtual machine then follow these steps
