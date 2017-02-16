@@ -20,9 +20,9 @@ Simply go to the docker folder and type the following commands
 	$ docker build -t lmejias3/mysql ./mysql
 	$ docker build -t lmejias3/apache-php ./apache-php/
 	$ docker network create --subnet=[subnet ip] --gateway=[gateway ip] [net name]
-	$ docker run --net [net name] --ip [mysql ip] -e MYSQL_ROOT_PASSWORD=[mysql root password] -p [mysql port]:3306 -v [local mysql folder]:/var/lib/mysql --name [mysql container name] -d lmejias3/mysql
+	$ docker run --net [net name] --ip [mysql ip] -e MYSQL_ROOT_PASSWORD=[mysql root password] -e APACHE_HOSTS=[apache containers ips] -p [mysql port]:3306 -v [local mysql folder]:/var/lib/mysql --name [mysql container name] -d lmejias3/mysql
+	$ docker exec [mysql container name] /home/bookstore/initdb.sh
 	$ docker run --net [net name] --ip [apache ip] -e MYSQL_PORT=[mysql port] -e MYSQL_HOST=[mysql ip] -p [http port]:80 -p [https port]:443 -v [local storage folder]:/var/www/bookstore/public/books --name [apache container name] -d lmejias3/apache-php
-	$ docker exec -e APACHE_HOSTS=[apache containers ips] [mysql container name] /home/bookstore/initdb.sh
 
 ### where
 * __subnet ip:__ is the ip address of a subnet for all containers running this application. _e.g. 203.0.113.0/24_
@@ -30,6 +30,7 @@ Simply go to the docker folder and type the following commands
 * __net name:__ is the name given to the subnet. e.g _bookstore-net_
 * __mysql ip:__ is the ip address assigned to the mysql container. must be a valid ip address of the subnet. _e.g. 203.0.113.100_
 * __mysql root password:__ is the password associated to the root user in the mysql container. _e.g. 1234_
+* __apache containers ips:__ are all the ip addresses of the apache containers that can be connected to the mysql database. Wildcards can be used. _e.g. 1 (one host) 203.0.113.150 e.g. 2 (multiple hosts) 203.0.113.%_
 * __mysql port:__ is the port to access to the mysql daemon. _e.g. 3366_
 * __local mysql foler:__ is the local path to store the mysql data. _e.g. 1 (linux). /home/user1/docker/mysql e.g. 2 (windows) /c/Users/user1/docker/mysql_
 * __mysql container name:__ is the name associated with the running mysql container _e.g. bookstore-mysql_
@@ -38,7 +39,6 @@ Simply go to the docker folder and type the following commands
 * __https port:__ is the port to securely access to the apache server. _e.g. 443_
 * __local storage foler:__ is the local path to store the books previews (PDFs). _e.g. 1 (linux). /home/user1/docker/books e.g. 2 (windows) /c/Users/user1/docker/books_
 * __apache container name:__ is the name associated with the running apache-php container _e.g. bookstore-apache-php_
-* __apache containers ips:__ are all the ip addresses of the apache containers that can be connected to the mysql database. Wildcards can be used. _e.g. 1 (one host) 203.0.113.150 e.g. 2 (multiple hosts) 203.0.113.%_
 
 ### note
 > Creating a subnet for docker only works when running natively. If you're running docker toolbox over virtualbox omit the subnet creation, all net and ip assignaments to containers (with the --net and --ip otions) and use the following values for these env variables
