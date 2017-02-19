@@ -30,8 +30,7 @@
   echo '<br>';
   echo '<p>';
     echo Form::label('Category', 'categorynewbook', array('class'=>'uname', 'data-icon'=>'c'));
-    echo '<br>';
-    echo Form::select('categorynewbook', isset($book) ? $book['category'] : 'Arts & Photography', array_combine($categories, $categories), array('id' => 'citysignup'));
+    echo Form::select('categorynewbook', isset($book) ? $book['category'] : $categories[0], array_combine($categories, $categories), array('id' => 'citysignup'));
   echo '</p>';
 
   //author
