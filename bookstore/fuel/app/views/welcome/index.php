@@ -43,80 +43,95 @@
                 <a class="hiddenanchor" id="tologin"></a>
                 <div id="wrapper">
                     <div id="login" class="animate form">
-
-                        <form  autocomplete="on" id="form_id" method="post" name="myform" action="welcome/checkUser">
-                            <h1>Log in</h1>
-                            <p>
-                                <label for="emaillogin"  data-icon="u" class="uname" > Your email </label>
-                                <input id="emaillogin" name="emaillogin" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="required" type="email" placeholder="user@example.com"/>
-                            </p>
-                            <p>
-                                <label for="passwordlogin" data-icon="p" class="youpasswd" > Your password </label>
-
-                                <input id="passwordlogin"  name="passwordlogin" required="required" type="password" placeholder="eg. X8df!90EO" />
-                            </p>
-
-
-                            <p class="login button">
-                                <input type="submit" name="action" value="Login"/>
-                            </p>
-                            <p class="change_link">
-                             Not a member yet ?
-                                <a href="#toregister" class="to_register">Join us</a>
-                            </p>
-                        </form>
+                        <?php
+                            /**
+                             * Login Form
+                             */
+                            echo Form::open(array('method' => 'post', 'autocomplete' => 'on', 'id' => 'form_id', 'enctype' => 'multipart/form-data', 'action' => 'welcome/checkUser'));
+                            echo '<h1>Log in</h1>';
+                            
+                            //email
+                            echo '<p>';
+                            echo Form::label('Your email', 'emaillogin', array('class' => 'uname', 'data-icon' => 'u'));
+                            echo Form::input('emaillogin', '', array('required' => 'required', 'type' => 'email', 'placeholder' => 'user@example.com', 'pattern' => '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'));
+                            echo '</p>';
+                            
+                            //password
+                            echo '<p>';
+                            echo Form::label('Your password', 'passwordlogin', array('class' => 'youpasswd', 'data-icon' => 'p'));
+                            echo Form::input('passwordlogin', '', array('name' => 'passwordlogin', 'required' => 'required', 'type' => 'password', 'placeholder' => 'X8df!90EO'));
+                            echo '</p>';
+                            
+                            //login button
+                            echo '<p class=\'login button\'>';
+                            echo Form::submit('submit', 'Login');
+                            echo '</p>';
+                            echo Form::close();
+                            
+                            //go to register
+                            echo '<p class=\'change_link\'>';
+                            echo 'Not a member yet ?';
+                            echo Html::anchor('#toregister', 'Join us', array('class' => 'to_register'));
+                            echo '</p>';
+                        ?>
                     </div>
 
-
-                     <div id="register" class="animate form">
-
-                        <form  id="register_form_id" method="post" name="myform" autocomplete="on" action="welcome/registerUser">
-
-                            <h1> Sign up </h1>
-                            <p>
-                                <label for="emailsignup" class="uname" data-icon="e" >Email</label>
-                                <input id="emailsignup" name="emailsignup" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="required" type="email" placeholder="user@example.com" />
-                            </p>
-                            <p>
-                                <label for="namesignup" class="uname" data-icon="u">Name</label>
-                                <input id="namesignup"  name="namesignup" pattern="[a-zA-Z ]+$" required="required" type="text" placeholder="Pepito" />
-                            </p>
-                            <p>
-                                <label for="citysignup" class="uname" data-icon="m">City</label><br>
-                                <select id="citysignup" name="citysignup" required="required">
-                                    <?php
-                                        foreach($cities as $city){
-                                            echo "<option value=$city>$city</option>";
-                                        }
-                                    ?>
-                                </select>
-                                <!--<input id="citysignup" name="citysignup" required="required" type="text" placeholder="Medellín" />-->
-                            </p>
-                            <p>
-                                <label for="addresssignup" class="uname" data-icon="a">Address</label>
-                                <input id="addresssignup" name="addresssignup" required="required" type="text" placeholder="Cr 54 N° 27" />
-                            </p>
-                            <p>
-                                <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="X8df!90EO"/>
-                            </p>
-
-
-                            <p>
-                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="X8df!90EO"/>
-                            </p>
-
-
-                            <p class="signin button">
-                               <input type="submit" value="Sign up" />
-                           </p>
-
-                           <p class="change_link">
-                               Already a member ?
-                               <a href="#tologin" class="to_register"> Go and log in </a>
-                           </p>
-                       </form>
+                    <div id="register" class="animate form">
+                        <?php
+                            /**
+                             * Register Form
+                             */
+                            echo Form::open(array('method' => 'post', 'autocomplete' => 'on', 'id' => 'form_id', 'enctype' => 'multipart/form-data', 'action' => 'welcome/registerUser'));
+                            echo '<h1>Sign up</h1>'; 
+                            
+                            //email
+                            echo '<p>';
+                            echo Form::label('Email', 'emailsignup', array('class' => 'uname', 'data-icon' => 'e'));
+                            echo Form::input('emailsignup', '', array('required' => 'required', 'type' => 'email', 'placeholder' => 'user@example.com', 'pattern' => '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'));
+                            echo '</p>';
+                            
+                            //name
+                            echo '<p>';
+                            echo Form::label('Name', 'namesignup', array('class' => 'uname', 'data-icon' => 'u'));
+                            echo Form::input('namesignup', '', array('required' => 'required', 'type' => 'text', 'placeholder' => 'Pepito', 'pattern' => '[a-zA-Z ]+$'));
+                            echo '</p>';
+                            
+                            //city
+                            echo '<p>';
+                            echo Form::label('City', 'citysignup', array('class'=>'uname', 'data-icon'=>'m'));
+                            echo Form::select('citysignup', $cities[0], array_combine($cities, $cities), array('id' => 'citysignup'));
+                            echo '</p>';
+                            
+                            //address
+                            echo '<p>';
+                            echo Form::label('Address', 'addresssignup', array('class'=>'uname', 'data-icon'=>'a'));
+                            echo Form::input('addresssignup', '', array('required' => 'required', 'type' => 'text', 'placeholder' => 'Cr 54 N° 27'));
+                            echo '</p>';
+                            
+                            //password
+                            echo '<p>';
+                            echo Form::label('Your password', 'passwordsignup', array('class'=>'uname', 'data-icon'=>'p'));
+                            echo Form::input('passwordsignup', '', array('required' => 'required', 'type' => 'password', 'placeholder' => 'X8df!90EO'));
+                            echo '</p>';
+                            
+                            //password
+                            echo '<p>';
+                            echo Form::label('Please confirm your password', 'passwordsignup_confirm', array('class'=>'uname', 'data-icon'=>'p'));
+                            echo Form::input('passwordsignup_confirm', '', array('required' => 'required', 'type' => 'password', 'placeholder' => 'X8df!90EO'));
+                            echo '</p>';
+                            
+                            //login button
+                            echo '<p class=\'login button\'>';
+                            echo Form::submit('submit', 'Sign up');
+                            echo '</p>';
+                            echo Form::close();
+                            
+                            //go to login
+                            echo '<p class=\'change_link\'>';
+                            echo 'Already a member ?';
+                            echo Html::anchor('#tologin', 'Go and log in', array('class' => 'to_login'));
+                            echo '</p>';
+                        ?>
                    </div>
                </div>
            </div>
