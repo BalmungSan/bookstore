@@ -263,8 +263,16 @@ return array(
 	/**************************************************************************/
 	/* Always Load                                                            */
 	/**************************************************************************/
+	/**
+	 * Load the auth package
+	 */
+	'always_load' => array(
+    	'packages' => array(
+    		'auth',
+    	),
+	),
+	
 	// 'always_load'  => array(
-
 		/**
 		 * These packages are loaded on Fuel's startup.
 		 * You can specify them in the following manner:
