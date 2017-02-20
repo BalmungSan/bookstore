@@ -24,7 +24,7 @@ INSERT INTO cities (city) VALUES
 ('Buenaventura'), ('Pasto'), ('Manizales'), ('Montería'), ('Neiva');
 
 -- -----------------------------------------------------
--- Most important colombian cities
+-- Books Categories, taken from Amazon books
 -- -----------------------------------------------------
 INSERT INTO categories (category) VALUES
 ('Arts & Photography'), ('Biographies & Memoirs'), ('Children\'s Books'),
