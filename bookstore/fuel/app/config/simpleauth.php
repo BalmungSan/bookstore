@@ -37,7 +37,7 @@ return array(
     'remember_me' => array(
         'enabled' => true,
         'cookie_name' => 'bookstore_login',
-        'expiration' => 86400*31
+        'expiration' => 3600
     ),
     
     //groups and roles (None)
