@@ -116,7 +116,7 @@ Finally install the bookstore app
 
 	$ cp -rf bookstore/* /var/www/fuelphp-1.8/ //this is the bookstore folder inside this repo
 	$ mv /var/www/fuelphp-1.8 /var/www/bookstore
-	$ chown -R apache:pache /var/www/bookstore
+	$ chown -R apache:apache /var/www/bookstore
 	$ chmod -R g=u /var/www/bookstore
 
 Now you can access the application typing in a web browser the ip of the centos machine
