@@ -32,7 +32,7 @@
      * Login an user
      * @param email the email of the user
      * @param password the password of the user
-     * @return the userID if the credential are correct, if not return null
+     * @return the userId if the credential are correct, if not return null
      * @note this function uses the Auth package from FuelPHP
      * @note this function encrypts the password
      * @see Auth
@@ -47,6 +47,15 @@
         //if the user exists, return the user id
         return $auth->get_user_id()[1];
       }
+    }
+    
+    /**
+     * Get the actual login hash from a user using his id
+     * @param userId the id of the user to get his hash
+     * @return the actual login hash of the user
+     */
+    public static function getHash($userId) {
+      return DB::select('login_hash')->from('users')->where('id', '=', $userId)->execute()->get('login_hash');
     }
     
     /**
@@ -110,7 +119,7 @@
 
       //insert the user
       $auth = Auth::instance();
-      $userID = $auth->create_user(
+      $userId = $auth->create_user(
         $email,
         $password,
         $email,
@@ -119,8 +128,9 @@
       );
 
       //check if the insert succeed
-      if ($userID) {
-        $user->setId($userID);
+      if ($userId) {
+        $user->setId($userId);
+        $auth->login($email, $password);
         return true;
       } else {
         return false;
