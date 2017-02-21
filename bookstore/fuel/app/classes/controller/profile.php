@@ -34,22 +34,22 @@
      * @return  Response
      */
     public function action_index () {
-	  //check if the user is logged
-      if(!$user = Session::get('userInfo')){
+      //check if the user is logged
+      if (\Auth::check()) {
+        //if yes, prepare the profile page
+  	    $userId = \Auth::get_user_id()[0][1];
+  	    $view = View::forge('profile/profile');
+  	    $booksDTO = BookModel::getBooksByUser($userId);
+  	    $books = array_map(function ($b){return $b->toArray();}, $booksDTO);
+  	    $view->books = $books;
+  	    $categories = BookModel::getCategories();
+        $view->categories = $categories;
+        return $view;
+      } else {
         //if not, return to the login page
         echo '<script>alert("You have to Log In first");</script>';
         Response::redirect('/', 'refresh');
       }
-		
-	  //prepare the profile page
-	  $userId = $user->getId();
-	  $view = View::forge('profile/profile');
-	  $booksDTO = BookModel::getBooksByUser($userId);
-	  $books = array_map(function ($b){return $b->toArray();}, $booksDTO);
-	  $view->books = $books;
-	  $categories = BookModel::getCategories();
-      $view->categories = $categories;
-      return $view;
     }
 
 	/**
@@ -118,7 +118,8 @@
      * @return  Response
      */
     public function action_logOut(){
-      Session::destroy();
+      \Auth::dont_remember_me();
+      \Auth::logout();
       Response::redirect('/', 'location');
     }
   }
