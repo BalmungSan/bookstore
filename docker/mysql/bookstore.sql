@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `books` (
   INDEX `fk_books_category_idx` (`category_id` ASC),
   CONSTRAINT `fk_books_users`
     FOREIGN KEY (`user_id`)
-    REFERENCES `users` (`user_id`)
+    REFERENCES `users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_books_categories`
