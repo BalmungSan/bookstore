@@ -38,21 +38,20 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `email` NVARCHAR(50) NOT NULL COMMENT 'Must be a valid email address',
-  `password` BINARY(32) NOT NULL COMMENT 'md5 hash',
-  `name` NVARCHAR(50) NOT NULL,
-  `city_id` INT NOT NULL,
-  `address` NVARCHAR(50) NOT NULL COMMENT 'the address where the user wants to receive the books he buys',
-  PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
-  UNIQUE INDEX `user_email_UNIQUE` (`email` ASC),
-  INDEX `fk_users_cities_idx` (`city_id` ASC),
-  CONSTRAINT `fk_users_cities`
-    FOREIGN KEY (`city_id`)
-    REFERENCES `cities` (`city_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  `username` NVARCHAR(50) NOT NULL COMMENT 'its the email, only used by fuel',
+  `password` VARCHAR(255) NOT NULL COMMENT 'PBKDF2 hash using salt',
+  `group` int(11) NOT NULL DEFAULT '1' COMMENT 'Fuel groups, not used',
+  `last_login` VARCHAR(25) NOT NULL,
+  `login_hash` VARCHAR(255) NOT NULL COMMENT 'Login hash',
+  `profile_fields` text NOT NULL COMMENT 'All user fields (real name, city and address)',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `user_id_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `user_email_UNIQUE` (`email` ASC))
 DEFAULT CHARACTER SET utf8
 COLLATE utf8_general_ci
 ENGINE = InnoDB;
