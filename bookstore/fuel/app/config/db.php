@@ -14,11 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+ 
+/**
+ * Database Configuration
+ */
 return array (
-    'active' => 'dev',
+	//make sure mysql is the default configuration
+    'active' => 'mysql',
 
-	'dev' => array(
+	//the mysql connection configuration, using mysqli
+	'mysql' => array(
 	    'type'           => 'mysqli',
 	    'connection'     => array(
 	        'hostname'       => getenv('MYSQL_HOST'),
