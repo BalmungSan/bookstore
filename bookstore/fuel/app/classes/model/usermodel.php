@@ -45,7 +45,7 @@
         return null;
       } else {
         //if the user exists, return the user id
-        return $auth->get_user_id()[0][1];
+        return $auth->get_user_id()[1];
       }
     }
     
@@ -70,7 +70,7 @@
   
         //create the user
         $user = new UserDTO();
-        $user->setId($auth->get_user_id()[0][1]);
+        $user->setId($auth->get_user_id()[1]);
         $user->setEmail($auth->get_email());
         $user->setName($fields('name'));
         $user->setAddress($result('address'));
