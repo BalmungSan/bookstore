@@ -34,90 +34,78 @@
      * @return  Response
      */
     public function action_index() {
-	  //check if the user is logged
-      if(!$user = Session::get('userInfo')){
-		//if not, load the loggin function 
+	    //check if the user is logged
+      if (\Auth::check()) {
+        //if yes go to the profile page
+        Response::redirect('profile','location');
+      } else {
+        //if not, load the loggin page
         $view = View::forge('welcome/index');
         $view->cities = UserModel::getCities();
         return $view;
       }
-
-	  //if yes go to the profile page
-      Response::redirect('profile','location');
     }
 
-	/**
-	 * Register a new user in the database
-	 * @access post
-	 * @return Response
-	 */
+	  /**
+	   * Register a new user in the database
+	   * @access post
+	   * @return Response
+	   */
     public function post_registerUser() {
-	  //get the user data
+	    //get the user data
       $user = new UserDTO();
       $user->setEmail(Input::post('emailsignup'));
       $user->setName(Input::post('namesignup'));
       $user->setCity(Input::post('citysignup'));
       $user->setAddress(Input::post('addresssignup'));
 	  
-	  //check that both passwords are the same
+	    //check that both passwords are the same
       $password1 = Input::post('passwordsignup');
       $password2 = Input::post('passwordsignup_confirm');
-      if(!($password1 == $password2)){
-        echo '<script language="javascript">';
-        echo 'alert("Sorry, passwords does not match")';
-        echo '</script>';
+      if ($password1 != $password2) {
+        echo '<script language="javascript">"Sorry, passwords does not match");</script>';
         Response::redirect('/#toregister', 'refresh');
       }
 	  
-	  //try to register the user in the database
-      try{
-        if (UserModel::registerUser($user, $password1) == 1) {
-		  //if works login the new user
-		  Session::create();
-          Session::set('userInfo', $user);
-		  echo '<script language="javascript">';
-		  echo 'alert("Congratulations, you have a new account")';
-		  echo '</script>';
-          Response::redirect('profile', 'location');
-		} else {
-		  //if not print an error message
-		  echo '<script language="javascript">';
-          echo 'alert("Sorry, there was a problem. Please try again later")';
-          echo '</script>';
+	    //try to register the user in the database
+      try {
+        if (UserModel::registerUser($user, $password1)) {
+		    //if works login the new user
+		    \Auth::remember_me($user->getId());
+		    echo '<script language="javascript">alert("Congratulations, you have a new account");</script>';
+        Response::redirect('profile', 'location');
+		    } else {
+		      //if not print an error message
+		      echo '<script language="javascript">Sorry, email already exists");</script>';
           Response::redirect('/#toregister', 'refresh');
-		}
-      }catch(Exception $e){
-		//if something fail, print an error message
-        echo '<script language="javascript">';
-        echo 'alert("Sorry, email already exists")';
-        echo '</script>';
+		    }
+      } catch(Exception $e) {
+		    //if something fail, print an error message
+		    echo '<script language="javascript">alert("Sorry, there was a problem. Please try again later");</script>';
         Response::redirect('/#toregister', 'refresh');
       }
     }
 
-	/**
-	 * Login an user in the store
-	 * @access post
-	 * @return Response
-	 */
+	  /**
+	   * Login an user in the store
+	   * @access post
+	   * @return Response
+	   */
     public function post_checkUser() {
-	  //get the user email and password
+	    //get the user email and password
       $email      = Input::post('emaillogin');
       $password   = Input::post('passwordlogin');
 	  
-	  //check if the user credentials are correct
-      $userResult = UserModel::getUser($email, $password);
-      if ($userResult == null) {
-		//if not print an error message
+	    //check if the user credentials are correct
+      $userID = UserModel::loginUser($email, $password);
+      if ($userID == null) {
+		    //if not print an error message
         $view = View::forge('welcome/index');
-        echo '<script language="javascript">';
-        echo 'alert("Sorry, wrong user and/or password")';
-        echo '</script>';
+        echo '<script language="javascript">alert("Sorry, wrong user and/or password");</script>';
         Response::redirect('/#toregister', 'refresh');
       } else {
-		//if they are login the user
-        Session::create();
-        Session::set('userInfo', $userResult);
+		    //if they are login the user
+		    \Auth::remember_me($userID);
         Response::redirect('profile', 'location');
       }
     }
