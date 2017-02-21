@@ -71,7 +71,10 @@
       try {
         if (UserModel::registerUser($user, $password1)) {
 		    //if works login the new user
-		    \Auth::remember_me($user->getId());
+		    $userId = $user->getId();
+		    \Auth::remember_me($userId);
+		    Cookie::set('user_id', $userId);
+		    Cookie::set('login_hash', Session::get('login_hash'));
 		    echo '<script language="javascript">alert("Congratulations, you have a new account");</script>';
         Response::redirect('profile', 'location');
 		    } else {
@@ -97,15 +100,17 @@
       $password   = Input::post('passwordlogin');
 	  
 	    //check if the user credentials are correct
-      $userID = UserModel::loginUser($email, $password);
-      if ($userID == null) {
+      $userId = UserModel::loginUser($email, $password);
+      if ($userId == null) {
 		    //if not print an error message
         $view = View::forge('welcome/index');
         echo '<script language="javascript">alert("Sorry, wrong user and/or password");</script>';
         Response::redirect('/#toregister', 'refresh');
       } else {
 		    //if they are login the user
-		    \Auth::remember_me($userID);
+		    \Auth::remember_me($userId);
+		    Cookie::set('user_id', $userId);
+		    Cookie::set('login_hash', Session::get('login_hash'));
         Response::redirect('profile', 'location');
       }
     }
