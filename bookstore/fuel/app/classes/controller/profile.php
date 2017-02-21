@@ -16,6 +16,7 @@
    */
 
   //Imports
+  use \Model\UserModel;
   use \Model\BookModel;
   use \Model\BookDTO;
 
@@ -37,19 +38,39 @@
       //check if the user is logged
       if (\Auth::check()) {
         //if yes, prepare the profile page
-  	    $userId = \Auth::get_user_id()[0][1];
-  	    $view = View::forge('profile/profile');
-  	    $booksDTO = BookModel::getBooksByUser($userId);
-  	    $books = array_map(function ($b){return $b->toArray();}, $booksDTO);
-  	    $view->books = $books;
-  	    $categories = BookModel::getCategories();
-        $view->categories = $categories;
-        return $view;
+  	    $userId = \Auth::get_user_id()[1];
+  	    return $this->profile($userId);
       } else {
-        //if not, return to the login page
-        echo '<script>alert("You have to Log In first");</script>';
-        Response::redirect('/', 'refresh');
+        //if not, try to login using cookies
+        $userId = Cookie::get('user_id', -1);
+        $cookie_hash = Cookie::get('login_hash', '');
+        $db_hash = UserModel::getHash($userId);
+        if ($userId != -1 && $cookie_hash == $db_hash) {
+          //if there are valid credentials in the cookies login the user
+          \Auth::force_login($userId);
+          Cookie::set('login_hash', Session::get('login_hash'));
+          return $this->profile($userId);
+        } else {
+          //if not, redirect to the login screen
+          echo '<script>alert("You have to Log In first");</script>';
+          Response::redirect('/', 'refresh');
+        }
       }
+    }
+    
+    /**
+     * The profile page (Aux Function)
+     * @access  private
+     * @return  Response
+     */
+    private function profile($userId) {
+    	$view = View::forge('profile/profile');
+	    $booksDTO = BookModel::getBooksByUser($userId);
+	    $books = array_map(function ($b){return $b->toArray();}, $booksDTO);
+	    $view->books = $books;
+	    $categories = BookModel::getCategories();
+      $view->categories = $categories;
+      return $view;
     }
 
 	/**
@@ -120,6 +141,8 @@
     public function action_logOut(){
       \Auth::dont_remember_me();
       \Auth::logout();
+      Cookie::delete('user_id');
+		  Cookie::delete('login_hash');
       Response::redirect('/', 'location');
     }
   }
