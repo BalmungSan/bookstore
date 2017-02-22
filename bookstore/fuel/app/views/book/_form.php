@@ -19,6 +19,7 @@
    * Add and edit book form
    */
   echo Form::open(array('method' => 'post', 'autocomplete' => 'on', 'id' => 'form_id', 'enctype' => 'multipart/form-data'));
+  echo Form::input('userid', $userId, array('required' => 'required', 'type' => 'hidden'));
 
   //name
   echo '<p>';
@@ -55,11 +56,11 @@
   echo '<P>';
     echo Form::label('Is New?', 'isnewnewbook', array('class'=>'uname'));
     echo '<P>';
-      echo Form::radio('isNew', '1', isset($book) && !$book['isNew'] ? false : true);
-      echo Form::label(' New ', 'isNew');
+      echo Form::radio('isnew', '1', isset($book) && !$book['isNew'] ? false : true);
+      echo Form::label(' New ', 'isnew');
       echo '<br>';
-      echo Form::radio('isNew', '0', isset($book) && !$book['isNew'] ? true : false);
-      echo Form::label(' Second Hand ', 'isNew');
+      echo Form::radio('isnew', '0', isset($book) && !$book['isNew'] ? true : false);
+      echo Form::label(' Second Hand ', 'isnew');
     echo '</p>';
   echo '</P>';
 
