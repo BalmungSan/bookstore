@@ -54,9 +54,7 @@
 				<div id="left">
 					<h3>My Books</h3>
 					<ul>
-						<?php
-						foreach ($books as $book) {
-						?>
+						<?php foreach ($books as $book) {?>
 						<li>
 							<div class="well" id="book">
 								<div class="info">
@@ -75,10 +73,7 @@
 								</div>
 							</div>
 						</li>
-						<?php
-						}
-						Session::delete('myBooks');
-						?>
+						<?php } ?>
 					</ul>
 				</div>
 				<div id="rightUpper">
@@ -88,11 +83,7 @@
 					  		<input id="name" name="name" class="form-control" placeholder="Las Mil y una Noches" style="display: block;"/>
 					  	<input id="r0" type="radio" name="radioButton" value=0 onclick="search()"> Category<br>
                             <select id="categorynewbook" name="categorynewbook" class="form-control" style="display: none;">
-	                        <?php
-	                        foreach($categories as $category){
-	                          	echo "<option value='".$category."'>".$category."</option>";
-	                        }
-	                        ?>
+	                        <?php foreach ($categories as $category) {echo "<option value='".$category."'>".$category."</option>";}?>
 	                        </select>
 						<input id="r1" type="radio" name="radioButton" value=1 onclick="search()"> Author<br>
 					  		<input id="author" name="author" class="form-control"  placeholder="Edgar Allan Poe" style="display: none;"/>
