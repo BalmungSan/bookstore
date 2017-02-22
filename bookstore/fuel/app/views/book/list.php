@@ -36,6 +36,7 @@
 					<th>Author</th>
 					<th>Category</th>
 					<th>Units</th>
+					<th>Is New</th>
 					<th>Price</th>
 					<th>&nbsp;</th>
 				</tr>
@@ -43,11 +44,12 @@
 			<tbody>
 			<?php foreach ($books as $book): ?>
 				<tr>
-					<td><?php echo $book['name']; ?></td>
-					<td><?php echo $book['author']; ?></td>
-					<td><?php echo $book['category']; ?></td>
-					<td><?php echo $book['units']; ?></td>
-					<td><?php echo $book['price']; ?></td>
+					<td><?php echo $book['name'];?></td>
+					<td><?php echo $book['author'];?></td>
+					<td><?php echo $book['category'];?></td>
+					<td><?php echo $book['units'];?></td>
+					<td><?php echo $book['isNew'] ? 'Yes' : 'No';?></td>
+					<td><?php echo $book['price'];?></td>
 					<td>
 						<div class="btn-toolbar">
 							<div class="btn-group">
