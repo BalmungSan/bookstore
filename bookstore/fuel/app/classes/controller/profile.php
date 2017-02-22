@@ -15,8 +15,7 @@
    * limitations under the License.
    */
 
-  //Imports
-  use \Model\UserModel;
+  //Import the book model and dto
   use \Model\BookModel;
   use \Model\BookDTO;
 
@@ -26,119 +25,119 @@
    * The main page of the application
    *
    * @package  app
-   * @extends  Controller
+   * @extends  Controller_Common
    */
-  class Controller_Profile extends Controller {
+  class Controller_Profile extends Controller_Common {
     /**
      * The profile page
      * @access  public
-     * @return  Response
+     * @return  View
      */
     public function action_index () {
       //check if the user is logged
-      if (\Auth::check()) {
-        //if yes, prepare the profile page
-  	    $userId = \Auth::get_user_id()[1];
-  	    return $this->profile($userId);
+      if ($userId = $this->check_login()) {
+        //if yes, print the profile page
+        $view = View::forge('profile/profile');
+  	    $booksDTO = BookModel::getBooksByUser($userId);
+  	    $books = array_map(function ($b){return $b->toArray();}, $booksDTO);
+  	    $view->books = $books;
+  	    $categories = BookModel::getCategories();
+        $view->categories = $categories;
+        return $view;
       } else {
-        //if not, try to login using cookies
-        $userId = Cookie::get('user_id', -1);
-        $cookie_hash = Cookie::get('login_hash', '');
-        $db_hash = UserModel::getHash($userId);
-        if ($userId != -1 && $cookie_hash == $db_hash) {
-          //if there are valid credentials in the cookies login the user
-          \Auth::force_login($userId);
-          Cookie::set('login_hash', Session::get('login_hash'));
-          return $this->profile($userId);
-        } else {
-          //if not, redirect to the login screen
-          echo '<script>alert("You have to Log In first");</script>';
-          Response::redirect('/', 'refresh');
-        }
+        //if not, go to the loggin page
+        echo '<script>alert("You have to Log In first");</script>';
+        Response::redirect('/', 'refresh');
       }
     }
-    
-    /**
-     * The profile page (Aux Function)
-     * @access  private
-     * @return  Response
+
+	  /**
+     * The search page
+     * @access  post
+     * @return  View
      */
-    private function profile($userId) {
-    	$view = View::forge('profile/profile');
-	    $booksDTO = BookModel::getBooksByUser($userId);
-	    $books = array_map(function ($b){return $b->toArray();}, $booksDTO);
-	    $view->books = $books;
-	    $categories = BookModel::getCategories();
-      $view->categories = $categories;
+    public function post_search() {
+      //get the search option
+      $radioButton = Input::post("radioButton");
+      $resultDTO = null;
+      switch ($radioButton) {
+        case 0:
+          //search by category
+          $category = Input::post("categorynewbook");
+          $resultDTO = BookModel::searchByCategory($category);;
+          break;
+          
+        case 1:
+          //search by author
+          $author = Input::post("author");
+          $resultDTO = BookModel::searchByAuthor($author);
+          break;
+          
+        case 2:
+          //search by name
+          $name = Input::post("name");
+          $resultDTO = BookModel::searchByName($name);
+          break;
+          
+        case 3:
+          //search by price
+          $priceL = Input::post("priceL");
+          $priceU = Input::post("priceU");
+          $resultDTO = BookModel::searchByPrice($priceL, $priceU);
+          break;
+          
+        default:
+          //fail
+          Response::redirect_back('/', 'refresh');
+          break;
+      }
+
+      //print the book list view
+      $view = View::forge('book/list');
+      $view->books = array_map(function ($b){$b = $b->toArray(); $b[6] = null; return $b;}, $resultDTO);
       return $view;
     }
 
-	/**
-     * The search page
-     * @access  post
-     * @return  Response
-	 */
-    public function post_search() {
-      $radioButton = Input::post("radioButton");
-
-      if($radioButton == 0){
-        $category = Input::post("categorynewbook");
-        $resultDTO = BookModel::searchByCategory($category);;
-      }else if($radioButton == 1){
-        $author = Input::post("author");
-        if($author == ""){
-          echo '<script>alert("Please fill at least one field");</script>';
-            Response::redirect('/', 'refresh');
-        }
-        $resultDTO = BookModel::searchByAuthor($author);
-      }else if($radioButton == 2){
-        $name = Input::post("name");
-        if($name == ""){
-          echo '<script>alert("Please fill at least one field");</script>';
-          Response::redirect('/', 'refresh');
-        }
-        $resultDTO = BookModel::searchByName($name);
-      }else if($radioButton == 3){
-        $priceL = Input::post("priceL");
-        $priceU = Input::post("priceU");
-        if($priceL == "" and $priceU == ""){
-          echo '<script>alert("Please fill one field");</script>';
-          Response::redirect('/', 'refresh');
-        }
-        $resultDTO = BookModel::searchByPrice($priceL, $priceU);
-      }else{
-        Response::redirect_back('/', 'refresh');
-      }
-
-      $result = array_map(function ($b){$b = $b->toArray(); $b[6] = null; return $b;}, $resultDTO);
-      Session::set('booksArray', $result);
-      Response::redirect('book/list');
-    }
-
-	/**
+	  /**
      * Edit a book
      * @access  post
      * @return  Response
      */
-    public function action_editBook($bookId){
-	  Response::redirect("book/edit/".$bookId);
-	}
+    public function action_editBook($bookId) {
+      //check if the user is logged
+      if ($userId = $this->check_login()) {
+        //if yes, call the edit book method of the book controller
+        Response::redirect("book/edit/".$bookId."/".$userID);
+      } else {
+        //if not, go to the loggin page
+        echo '<script>alert("You have to Log In first");</script>';
+        Response::redirect('/', 'refresh');
+      }
+	  }
 	
-	/**
+	  /**
      * Delete a book
      * @access  post
      * @return  Response
      */
-	public function action_deleteBook($bookId){
-	  Response::redirect("book/delete/".$bookId);
-	}
+	  public function action_deleteBook($bookId) {
+	    //check if the user is logged
+      if ($userId = $this->check_login()) {
+        //if yes, call the delete book of the book controller
+	      Response::redirect("book/delete/".$bookId."/".$userId);
+      } else {
+        //if not, go to the loggin page
+        echo '<script>alert("You have to Log In first");</script>';
+        Response::redirect('/', 'refresh');
+      }
+	  }
 	
-	/**
+	  /**
      * Logout
      * @access  public
      * @return  Response
      */
-    public function action_logOut(){
+    public function action_logOut() {
       \Auth::dont_remember_me();
       \Auth::logout();
       Cookie::delete('user_id');

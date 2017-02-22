@@ -25,9 +25,9 @@
    * A basic Login and SignUp page
    *
    * @package  app
-   * @extends  Controller
+   * @extends  Controller_Common
    */
-  class Controller_Welcome extends Controller {
+  class Controller_Welcome extends Controller_Common {
     /**
      * The index page
      * @access  public
@@ -35,11 +35,11 @@
      */
     public function action_index() {
 	    //check if the user is logged
-      if (\Auth::check()) {
+      if ($this->check_login()) {
         //if yes go to the profile page
-        Response::redirect('profile','location');
+        Response::redirect('/profile', 'location');
       } else {
-        //if not, load the loggin page
+        //if not, print the loggin page
         $view = View::forge('welcome/index');
         $view->cities = UserModel::getCities();
         return $view;
@@ -121,7 +121,7 @@
      * @return  Response
      */
     public function action_404() {
-      return Response::forge(Presenter::forge('welcome/404'), 404);
+      Response::forge(Presenter::forge('welcome/404'), 404);
     }
   }
 ?>
