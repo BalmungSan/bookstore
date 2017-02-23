@@ -15,9 +15,9 @@
    * limitations under the License.
    */
 
-  //Import the user model and dto
+  //Import the user aux class
+  use \Aux\User as AuxUser;
   use \Model\UserModel;
-  use \Model\UserDTO;
 
   /**
    * The Welcome Controller.
@@ -45,6 +45,38 @@
         return $view;
       }
     }
+    
+    /**
+     * Set the login cookies and redirects to the profile page
+     * @note this is an aux method
+     * @access private
+     * @return Response
+     * @see this::post_checkUser
+     * @see this::post_registerUser
+     */
+    private function login($userId) {
+      \Auth::remember_me($userId);
+		  Cookie::set('user_id', $userId);
+		  Cookie::set('login_hash', Session::get('login_hash'));
+      Response::redirect('profile', 'location');
+    }
+    
+    /**
+	   * Login an user in the store
+	   * @access post
+	   * @return Response
+	   */
+    public function post_checkUser() {
+	    //check if the user credentials are correct
+      if ($userId = AuxUser::loginUser()) {
+        //if they are login the user
+        $this->login($userId);
+      } else {
+        //if not print an error message
+        echo '<script language="javascript">alert("Sorry, wrong user and/or password");</script>';
+        Response::redirect('/#toregister', 'refresh');
+      }
+    }
 
 	  /**
 	   * Register a new user in the database
@@ -52,66 +84,15 @@
 	   * @return Response
 	   */
     public function post_registerUser() {
-	    //get the user data
-      $user = new UserDTO();
-      $user->setEmail(Input::post('emailsignup'));
-      $user->setName(Input::post('namesignup'));
-      $user->setCity(Input::post('citysignup'));
-      $user->setAddress(Input::post('addresssignup'));
-	  
-	    //check that both passwords are the same
-      $password1 = Input::post('passwordsignup');
-      $password2 = Input::post('passwordsignup_confirm');
-      if ($password1 != $password2) {
-        echo '<script language="javascript">"Sorry, passwords does not match");</script>';
-        Response::redirect('/#toregister', 'refresh');
-      }
-	  
-	    //try to register the user in the database
-      try {
-        if (UserModel::registerUser($user, $password1)) {
-		    //if works login the new user
-		    $userId = $user->getId();
-		    \Auth::remember_me($userId);
-		    Cookie::set('user_id', $userId);
-		    Cookie::set('login_hash', Session::get('login_hash'));
-		    echo '<script language="javascript">alert("Congratulations, you have a new account");</script>';
-        Response::redirect('profile', 'location');
-		    } else {
-		      //if not print an error message
-		      echo '<script language="javascript">Sorry, email already exists");</script>';
-          Response::redirect('/#toregister', 'refresh');
-		    }
-      } catch(Exception $e) {
-		    //if something fail, print an error message
-		    echo '<script language="javascript">alert("Sorry, there was a problem. Please try again later");</script>';
-        Response::redirect('/#toregister', 'refresh');
-      }
-    }
-
-	  /**
-	   * Login an user in the store
-	   * @access post
-	   * @return Response
-	   */
-    public function post_checkUser() {
-	    //get the user email and password
-      $email      = Input::post('emaillogin');
-      $password   = Input::post('passwordlogin');
-	  
-	    //check if the user credentials are correct
-      $userId = UserModel::loginUser($email, $password);
-      if ($userId == null) {
-		    //if not print an error message
-        $view = View::forge('welcome/index');
-        echo '<script language="javascript">alert("Sorry, wrong user and/or password");</script>';
-        Response::redirect('/#toregister', 'refresh');
+      //try to register the user
+      $status = AuxUser::registerUser();
+      if ($status[0]) {
+        //if the register process worked, login the user
+        $this->login($status[1]);
       } else {
-		    //if they are login the user
-		    \Auth::remember_me($userId);
-		    Cookie::set('user_id', $userId);
-		    Cookie::set('login_hash', Session::get('login_hash'));
-        Response::redirect('profile', 'location');
+        //if not, print the error message
+        echo '<script language="javascript">alert("'.$status[1].'");</script>';
+        Response::redirect('/#toregister', 'refresh');
       }
     }
 
