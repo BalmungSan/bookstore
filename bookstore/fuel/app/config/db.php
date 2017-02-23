@@ -32,14 +32,14 @@ return array (
 	        'username'       => 'bookstore',
 	        'password'       => 'bookstore',
 	        'persistent'     => true,
-	        'compress'       => true,
+	        'compress'       => true
 	    ),
 	    'identifier'     => '`',
 	    'table_prefix'   => '',
 	    //'charset'        => 'utf8',
 	    'enable_cache'   => true,
 	    'profiling'      => false,
-	    'readonly'       => false,
-	),
+	    'readonly'       => false
+	)
 );
 ?>
