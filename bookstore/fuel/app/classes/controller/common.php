@@ -30,6 +30,8 @@
     /**
      * Check if there is a logged user
      * @return the id of the user logged in, or false if there is no user logged in
+     * @see Auth
+     * @see UserModel::getHash
      */
     protected function checkLogin() {
       //check if the user is logged by session

@@ -32,7 +32,7 @@
      * Login an user
      * @param email the email of the user
      * @param password the password of the user
-     * @return the userId if the credential are correct, if not return null
+     * @return the userId if the credential are correct, if not return false
      * @note this function uses the Auth package from FuelPHP
      * @note this function encrypts the password
      * @see Auth
@@ -42,7 +42,7 @@
       $auth = Auth::instance();
       if (!$auth->login($email, $password)) {
         //check if the user doesn't exists
-        return null;
+        return false;
       } else {
         //if the user exists, return the user id
         return $auth->get_user_id()[1];
