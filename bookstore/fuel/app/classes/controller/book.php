@@ -35,7 +35,7 @@
      */
 		public function action_create() {
 			//check if the user is logged
-      if ($userId = $this->check_login()) {
+      if ($userId = $this->checkLogin()) {
         //if yes, print the create book page
         $view = View::forge('book/create');
       	$view->data = array('categories' => BookModel::getCategories(), 'userId' => $userId);
@@ -108,7 +108,7 @@
 	  	is_null($bookId) and Response::redirect_back('/', 'location');
 	  	
 	  	//check if the user is logged
-      if ($userId = $this->check_login()) {
+      if ($userId = $this->checkLogin()) {
       	//if yes, check if the user can edit the book
       	$book = BookModel::getBook($bookId);
       	if ($userId == $book->getUser()) {
@@ -201,7 +201,7 @@
 		  is_null($bookId) and Response::redirect('/', 'location');
 	
 			//check if the user is logged
-      if ($userId = $this->check_login()) {
+      if ($userId = $this->checkLogin()) {
       	//if yes, check if the user can edit the book
       	$book = BookModel::getBook($bookId);
       	if ($userId == $book->getUser()) {

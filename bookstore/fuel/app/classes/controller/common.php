@@ -31,7 +31,7 @@
      * Check if there is a logged user
      * @return the id of the user logged in, or false if there is no user logged in
      */
-    protected function check_login() {
+    protected function checkLogin() {
       //check if the user is logged by session
       if (\Auth::check()) {
         //if yes, return the id using the Auth package

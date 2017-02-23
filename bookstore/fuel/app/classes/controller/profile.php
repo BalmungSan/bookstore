@@ -35,7 +35,7 @@
      */
     public function action_index () {
       //check if the user is logged
-      if ($userId = $this->check_login()) {
+      if ($userId = $this->checkLogin()) {
         //if yes, print the profile page
         $view = View::forge('profile/profile');
   	    $booksDTO = BookModel::getBooksByUser($userId);
@@ -105,7 +105,7 @@
      */
     public function action_editBook($bookId) {
       //check if the user is logged
-      if ($this->check_login()) {
+      if ($this->checkLogin()) {
         //if yes, call the edit book method of the book controller
         Response::redirect("book/edit/".$bookId);
       } else {
@@ -122,7 +122,7 @@
      */
 	  public function action_deleteBook($bookId) {
 	    //check if the user is logged
-      if ($this->check_login()) {
+      if ($this->checkLogin()) {
         //if yes, call the delete book of the book controller
 	      Response::redirect("book/delete/".$bookId."/");
       } else {

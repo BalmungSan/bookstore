@@ -35,7 +35,7 @@
      */
     public function action_index() {
 	    //check if the user is logged
-      if ($this->check_login()) {
+      if ($this->checkLogin()) {
         //if yes go to the profile page
         Response::redirect('/profile', 'location');
       } else {
