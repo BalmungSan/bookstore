@@ -98,12 +98,17 @@
 					</form>
 				</div>
 				<div id="rightDown">
-					<h3>Add Book:</h3>
-					<?php echo Html::anchor('book/create', 'Add new Book', array('class' => 'btn btn-success', 'id' => 'btnAddBook')); ?>
+					<h3>Actios:</h3>
+					<?php
+					echo Html::anchor('book/create', 'Add new Book', array('class' => 'btn btn-success', 'id' => 'btnAddBook'));
+					echo Html::anchor('user/edit', 'Edit profile', array('class' => 'btn btn-success', 'id' => 'btnEditProfile'));
+					echo Html::anchor('user/changepassword', 'Change password', array('class' => 'btn btn-info', 'id' => 'btnChangePassword'));
+					echo Html::anchor('book/delete', 'Delete account', array('class' => 'btn btn-danger', 'id' => 'btnDeleteProfile'));
+					?>
 				</div>
 			</section>
 		</div>
-		<footer><!-- Defining the footer section of the page -->
+		<footer>
 			<div id="privacy">
 				BookStore © 2017
 			</div>

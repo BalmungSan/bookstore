@@ -691,7 +691,23 @@ footer a{
 }
 
 #btnAddBook {
-    margin: 20px;
+    margin: 5px;
+    margin-left: 20px;
+}
+
+#btnEditProfile {
+    margin: 5px;
+    margin-left: 20px;
+}
+
+#btnChangePassword {
+    margin: 5px;
+    margin-left: 20px;
+}
+
+#btnDeleteProfile {
+    margin: 5px;
+    margin-left: 20px;
 }
 
 #prices {
