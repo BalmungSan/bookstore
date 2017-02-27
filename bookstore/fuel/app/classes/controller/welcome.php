@@ -16,7 +16,7 @@
    */
 
   //Import the user aux class
-  use \Aux\User as AuxUser;
+  use \Aux\Welcome as AuxWelcome;
   use \Model\UserModel;
 
   /**
@@ -68,7 +68,7 @@
 	   */
     public function post_checkUser() {
 	    //check if the user credentials are correct
-      if ($userId = AuxUser::loginUser()) {
+      if ($userId = AuxWelcome::loginUser()) {
         //if they are login the user
         $this->login($userId);
       } else {
@@ -85,7 +85,7 @@
 	   */
     public function post_registerUser() {
       //try to register the user
-      $status = AuxUser::registerUser();
+      $status = AuxWelcome::registerUser();
       if ($status[0]) {
         //if the register process worked, login the user
         $this->login($status[1]);

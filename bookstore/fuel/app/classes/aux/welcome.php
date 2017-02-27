@@ -25,14 +25,14 @@
   use \Input;
   
   /**
-   * The User Aux Class.
+   * The Welcome Aux Class.
    *
-   * an auxiliary class with all operations over users
+   * an auxiliary class with the operations of login and sign up
    * used to unify the normal and rest controllers
    *
    * @package  app
    */
-  class User {
+  class Welcome {
     /**
 	   * Login an user
 	   * @access app

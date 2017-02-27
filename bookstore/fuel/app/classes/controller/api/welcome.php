@@ -15,18 +15,18 @@
    * limitations under the License.
    */
    
-  //Import the user aux class
-  use \Aux\User as AuxUser;
+  //Import the welcome aux class
+  use \Aux\Welcome as AuxWelcome;
   
   /**
-   * Rest User Controller
+   * Rest Welcome Controller
    * 
    * Provides an API to manipulate users data in the app
    *
    * @package  app
    * @extends  Controller_Rest
    */
-  class Controller_api_User extends Controller_api_Common {
+  class Controller_api_Welcome extends Controller_api_Common {
     /**
      * Override the default checkLogin to always authorize the access
      * as the actions of this controller dont need authentication
@@ -42,7 +42,7 @@
 	   * @return a json with the id of the user or false if credentials are invalid
 	   */
     public function post_checkUser() {
-      return $this->response(array('user id' => AuxUser::loginUser()));
+      return $this->response(array('user id' => AuxWelcome::loginUser()));
     }
     
     /**
@@ -52,7 +52,7 @@
      */
     public function post_registerUser() {
       //try to register the user
-      $status = AuxUser::registerUser();
+      $status = AuxWelcome::registerUser();
       if ($status[0]) {
         //if the register process worked, return the user id
         return $this->response(array('succeed' => true,
