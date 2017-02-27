@@ -84,5 +84,15 @@
 		    return array(false, 'Sorry, there was a problem. Please try again later');
       }
     }
+    
+    /**
+	   * Get the list of all cities
+	   * @access app
+	   * @return an array with all the cities
+	   * @see UserModel::getCities
+	   */
+    public static function getCities() {
+      return UserModel::getCities();
+    }
   }
 ?>

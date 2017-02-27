@@ -17,7 +17,6 @@
 
   //Import the user aux class
   use \Aux\Welcome as AuxWelcome;
-  use \Model\UserModel;
 
   /**
    * The Welcome Controller.
@@ -41,7 +40,7 @@
       } else {
         //if not, print the loggin page
         $view = View::forge('welcome/index');
-        $view->cities = UserModel::getCities();
+        $view->cities = AuxWelcome::getCities();
         return $view;
       }
     }
