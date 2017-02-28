@@ -65,29 +65,23 @@
      * @see UserDTO
      */
     public static function getUser() {
-      //check if there is a logged user
+      //get the user field
       $auth = Auth::instance();
-      if (!$auth->login($email, $password)) {
-        //if not return null
-        return null;
-      } else {
-        //get the user field
-        $fields = $auth->get_profile_fields();
-        
-        //get the city name
-        $city = DB::select('city')->from('cities')->where('city_id', '=', $fields('city'))->execute()->get('city');
-  
-        //create the user
-        $user = new UserDTO();
-        $user->setId($auth->get_user_id()[1]);
-        $user->setEmail($auth->get_email());
-        $user->setName($fields('name'));
-        $user->setAddress($result('address'));
-        $user->setCity($city);
+      $fields = $auth->get_profile_fields();
+      
+      //get the city name
+      $city = DB::select('city')->from('cities')->where('city_id', '=', $fields['city_id'])->execute()->get('city');
 
-        //return the UserDTO
-        return $user;
-      }
+      //create the user
+      $user = new UserDTO();
+      $user->setId($auth->get_user_id()[1]);
+      $user->setEmail($auth->get_email());
+      $user->setName($fields['name']);
+      $user->setAddress($fields['address']);
+      $user->setCity($city);
+
+      //return the UserDTO
+      return $user;
     }
 
     /**
@@ -107,9 +101,9 @@
       //prepare the columns an values
       $email = $user->getEmail();
       $colums = array(
-        "name",
-        "city_id",
-        "address"
+        'name',
+        'city_id',
+        'address'
       );
       $values = array(
         $user->getName(),
@@ -135,6 +129,24 @@
       } else {
         return false;
       }
+    }
+    
+    /**
+	   * Update the data of an user in the database
+	   * @param user an UserDTO with the new data of the user
+	   * @return true if the update process worked, false otherwise
+	   * @note this function uses the Auth package from FuelPHP
+	   * @see UserDTO
+	   */
+    public static function editUser($user) {
+      //get the city id of the user's city
+      $city = DB::select('city_id')->from('cities')->where('city', '=', $user->getCity())->execute();
+      
+      //update the user data
+      $auth = Auth::instance();
+      return $auth->update_user(array('name'    => $user->getName(),
+                                      'city_id' => $city->get('city_id'),
+                                      'address' => $user->getAddress()));
     }
 
     /**
