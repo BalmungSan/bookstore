@@ -37,20 +37,20 @@
 
 <body>
 	<div class="container">
-		<header><!-- Defining the header section of the page -->
-			<div class="top_head"><!-- Defining the top head element -->
+		<header>
+			<div class="top_head">
 				<div id="salir">
 					<button type="button" class="btn btn-danger" onclick="window.location.href='profile/logOut';"><strong>Log Out</strong></button>
 				</div>
 
-				<div class="logo"><!-- Defining the logo element -->
+				<div class="logo">
 					<img id="logo" src="assets/img/logo.png">
 				</div>
 			</div>
 		</header>
 
-		<div id="main"><!-- Defining submain content section -->
-			<section id="content"><!-- Defining the content section #2 -->
+		<div id="main">
+			<section id="content">
 				<div id="left">
 					<h3>My Books</h3>
 					<ul>
@@ -80,30 +80,30 @@
 					<h3>Search By:</h3>
 					<form id="search_form" method="post" name="search_form" autocomplete="on" action="profile/search">
 						<input id="r2" type="radio" name="radioButton" value=2 onclick="search()" checked> Name<br>
-					  		<input id="name" name="name" class="form-control" placeholder="Las Mil y una Noches" style="display: block;"/>
-					  	<input id="r0" type="radio" name="radioButton" value=0 onclick="search()"> Category<br>
-                            <select id="categorynewbook" name="categorynewbook" class="form-control" style="display: none;">
-	                        <?php foreach ($categories as $category) {echo "<option value='".$category."'>".$category."</option>";}?>
-	                        </select>
+					  <input id="name" name="name" class="form-control" placeholder="Las Mil y una Noches" style="display: block;"/>
+					  <input id="r0" type="radio" name="radioButton" value=0 onclick="search()"> Category<br>
+            <select id="categorynewbook" name="categorynewbook" class="form-control" style="display: none;">
+	          <?php foreach ($categories as $category) {echo "<option value='".$category."'>".$category."</option>";}?>
+	          </select>
 						<input id="r1" type="radio" name="radioButton" value=1 onclick="search()"> Author<br>
-					  		<input id="author" name="author" class="form-control"  placeholder="Edgar Allan Poe" style="display: none;"/>
+					  <input id="author" name="author" class="form-control"  placeholder="Edgar Allan Poe" style="display: none;"/>
 						<input id="r3" type="radio" name="radioButton" value=3 onclick="search()"> Price<br>
 						<div id="prices" style="display: none;">
 							<input type="number" id="priceL" name="priceL" class="form-control"  placeholder="$60000"/>
-					  		<input type="number" id="priceU" name="priceU" class="form-control"  placeholder="$170000"/>
+					  	<input type="number" id="priceU" name="priceU" class="form-control"  placeholder="$170000"/>
 						</div>
 						<p class="signin">
-                            <input type="submit" value="Search" class="btn btn-primary" id="search_button" />
-                        </p>
+              <input type="submit" value="Search" class="btn btn-primary" id="search_button" />
+            </p>
 					</form>
 				</div>
 				<div id="rightDown">
 					<h3>Actios:</h3>
 					<?php
-					echo Html::anchor('book/create', 'Add new Book', array('class' => 'btn btn-success', 'id' => 'btnAddBook'));
-					echo Html::anchor('user/edit', 'Edit profile', array('class' => 'btn btn-success', 'id' => 'btnEditProfile'));
-					echo Html::anchor('user/changepassword', 'Change password', array('class' => 'btn btn-info', 'id' => 'btnChangePassword'));
-					echo Html::anchor('book/delete', 'Delete account', array('class' => 'btn btn-danger', 'id' => 'btnDeleteProfile'));
+					  echo Html::anchor('book/create', 'Add New Book', array('class' => 'btn btn-success', 'id' => 'btnAddBook'));
+					  echo Html::anchor('user/edit', 'Edit Profile', array('class' => 'btn btn-success', 'id' => 'btnEditProfile'));
+					  echo Html::anchor('user/changePassword', 'Change Password', array('class' => 'btn btn-info', 'id' => 'btnChangePassword'));
+					  echo Html::anchor('user/delete', 'Delete Account', array('class' => 'btn btn-danger', 'id' => 'btnDeleteProfile'));
 					?>
 				</div>
 			</section>

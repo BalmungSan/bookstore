@@ -21,7 +21,7 @@
   /**
    * Rest Welcome Controller
    * 
-   * Provides an API to manipulate users data in the app
+   * Provides an API to log in and sign up users
    *
    * @package  app
    * @extends  Controller_Rest

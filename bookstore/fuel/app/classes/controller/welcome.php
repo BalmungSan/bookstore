@@ -15,13 +15,13 @@
    * limitations under the License.
    */
 
-  //Import the user aux class
+  //Import the welcome aux class
   use \Aux\Welcome as AuxWelcome;
 
   /**
    * The Welcome Controller.
    *
-   * A basic Login and SignUp page
+   * A basic Log in and Sign up page
    *
    * @package  app
    * @extends  Controller_Common
@@ -72,7 +72,7 @@
         $this->login($userId);
       } else {
         //if not print an error message
-        echo '<script language="javascript">alert("Sorry, wrong user and/or password");</script>';
+        echo '<script>alert("Sorry, wrong user and/or password");</script>';
         Response::redirect('/#toregister', 'refresh');
       }
     }
@@ -90,7 +90,7 @@
         $this->login($status[1]);
       } else {
         //if not, print the error message
-        echo '<script language="javascript">alert("'.$status[1].'");</script>';
+        echo '<script>alert("'.$status[1].'");</script>';
         Response::redirect('/#toregister', 'refresh');
       }
     }

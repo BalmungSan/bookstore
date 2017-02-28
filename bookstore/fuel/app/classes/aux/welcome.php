@@ -27,7 +27,7 @@
   /**
    * The Welcome Aux Class.
    *
-   * an auxiliary class with the operations of login and sign up
+   * an auxiliary class with the operations of log in and sign up
    * used to unify the normal and rest controllers
    *
    * @package  app

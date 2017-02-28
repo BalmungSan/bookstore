@@ -59,7 +59,7 @@
                             //password
                             echo '<p>';
                             echo Form::label('Your password', 'passwordlogin', array('class' => 'youpasswd', 'data-icon' => 'p'));
-                            echo Form::input('passwordlogin', '', array('name' => 'passwordlogin', 'required' => 'required', 'type' => 'password', 'placeholder' => 'X8df!90EO'));
+                            echo Form::password('passwordlogin', '', array('required' => 'required', 'placeholder' => 'X8df!90EO'));
                             echo '</p>';
                             
                             //login button
@@ -111,13 +111,13 @@
                             //password
                             echo '<p>';
                             echo Form::label('Your password', 'passwordsignup', array('class'=>'uname', 'data-icon'=>'p'));
-                            echo Form::input('passwordsignup', '', array('required' => 'required', 'type' => 'password', 'placeholder' => 'X8df!90EO'));
+                            echo Form::password('passwordsignup', '', array('required' => 'required', 'placeholder' => 'X8df!90EO'));
                             echo '</p>';
                             
-                            //password
+                            //password confirm
                             echo '<p>';
                             echo Form::label('Please confirm your password', 'passwordsignup_confirm', array('class'=>'uname', 'data-icon'=>'p'));
-                            echo Form::input('passwordsignup_confirm', '', array('required' => 'required', 'type' => 'password', 'placeholder' => 'X8df!90EO'));
+                            echo Form::password('passwordsignup_confirm', '', array('required' => 'required', 'placeholder' => 'X8df!90EO'));
                             echo '</p>';
                             
                             //login button

@@ -31,8 +31,8 @@
      */
     protected function checkLogin() {
       //get the user email and password
-      $email    = Input::post('emaillogin');
-      $password = Input::post('passwordlogin');
+      $email    = Input::post('email');
+      $password = Input::post('password');
 	  
 	    //check if the user credentials are correct
 	    $auth = Auth::instance();

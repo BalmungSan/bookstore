@@ -19,7 +19,7 @@
    * Add and edit book form
    */
   echo Form::open(array('method' => 'post', 'autocomplete' => 'on', 'id' => 'form_id', 'enctype' => 'multipart/form-data'));
-  echo Form::input('userid', $userId, array('required' => 'required', 'type' => 'hidden'));
+  echo Form::hidden('userid', $userId, array('required' => 'required'));
 
   //name
   echo '<p>';
@@ -28,7 +28,6 @@
   echo '</p>';
 
   //category
-  echo '<br>';
   echo '<p>';
     echo Form::label('Category', 'categorynewbook', array('class'=>'uname', 'data-icon'=>'c'));
     echo Form::select('categorynewbook', isset($book) ? $book['category'] : $categories[0], array_combine($categories, $categories), array('id' => 'citysignup'));
@@ -71,12 +70,9 @@
   echo '</p>';
 
   //back & submit
-  echo '<p>';
-    echo Form::button('back', 'Back', array('id'=>'back-button', 'onclick' => 'window.location.href=\'/profile\';'));
-    echo '<p class=\'signin button\'>';
-      echo Form::submit('submit', 'OK');
-    echo '</p>';
+  echo Html::anchor('profile', 'Back', array('class' => 'btn btn-info', 'id'=>'back-button'));
+  echo '<p class=\'signin button\'>';
+  echo Form::submit('submit', 'OK');
   echo '</p>';
-
   echo Form::close();
 ?>
