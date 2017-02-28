@@ -28,11 +28,9 @@
    */
   class Controller_api_User extends Controller_api_Common {
     /**
-	   * Get all data of the current logged user
-	   * @access app
-	   * @return an array with all of the data
-	   * @see UserModel::getUser
-	   * @see UserDTO::toArray
+	   * Get all data of the user
+	   * @access post
+	   * @return a json with all of the user data
 	   */
     public function post_getUser() {
       return $this->response(AuxUser::getUser());
@@ -40,12 +38,47 @@
     
     /**
 	   * Edit the data of an user
-	   * @access app
-	   * @return true if the update process worked, false otherwise
-	   * @see UserModel::editUser
+	   * @access post
+	   * @return a json with the 'succeed' variable set to true if the update process worked, false otherwise
 	   */
     public function post_editUser() {
       return $this->response(array('succeed' => AuxUser::editUser()));
+    }
+    
+    /**
+	   * Change the password of an user
+	   * @access post
+	   * @return a json with the 'succeed' variable set to true if the update process worked,
+	   * otherwise the value will be false and the 'error' variable will be set with the error message
+	   */
+    public function post_changePassword() {
+      //try to change the password
+      $status = AuxUser::changePassword();
+      if ($status[0]) {
+        //if the password change process worked, return succeed as true
+        return $this->response(array('succeed' => true));
+      } else {
+        //if not, return succeed as false and the error message
+        return $this->response(array('succeed' => false, 'error' => $status[1]));
+      }
+    }
+    
+    /**
+	   * Delete an user account
+	   * @access post
+	   * @return a json with the 'succeed' variable set to true if the delete process worked,
+	   * otherwise the value will be false and the 'error' variable will be set with the error message
+	   */
+    public function post_delete() {
+      //try to delete the account
+      $status = AuxUser::deleteUser();
+      if ($status[0]) {
+        //if the delete process worked, return succeed as true
+        return $this->response(array('succeed' => true));
+      } else {
+        //if not, return succeed as false and the error message
+        return $this->response(array('succeed' => false, 'error' => $status[1]));
+      }
     }
   }
 ?>

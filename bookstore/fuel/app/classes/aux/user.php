@@ -62,6 +62,45 @@
     }
     
     /**
+	   * Change the password of an user
+	   * @access app
+	   * @return true if the update process worked, otherwise flase and an error message
+	   * @see UserModel::changePassword
+	   */
+    public static function changePassword() {
+      //get the user old and new password
+      $oldPassword = Input::post('password');
+      $newPassword = Input::post('newPassword');
+      
+      //try to change the password
+      if ($oldPassword == $newPassword) {
+        //if both passwords are the same, return an error message
+        return array(false, 'Both Passwords are the same');
+      } else if (UserModel::changePassword($oldPassword, $newPassword)) {
+        //if the password change process worked, return true
+        return array(true);
+      } else {
+        //if the password change process failed, return an error message
+        return array(false, 'Old password didn\'t match');
+      }
+    }
+    
+    /**
+	   * Delete an user account
+	   * @access app
+	   * @return true if the delete process worked, otherwise false and an error message
+	   * @see UserModel::deleteUser
+	   */
+    public static function deleteUser() {
+      //get user email and password
+      $email    = Input::post('email');
+      $password = Input::post('password');
+      
+      //try to delete the account
+      return UserModel::deleteUser($email, $password);
+    }
+    
+    /**
 	   * Get the list of all cities
 	   * @access app
 	   * @return an array with all the cities

@@ -148,6 +148,40 @@
                                       'city_id' => $city->get('city_id'),
                                       'address' => $user->getAddress()));
     }
+    
+    /**
+	   * Change the password of an user
+	   * @param oldPassword the current user's password
+	   * @param newPassword the new password for the user
+	   * @return true if the update process worked, otherwise false
+	   * @note this function uses the Auth package from FuelPHP
+	   */
+    public static function changePassword($oldPassword, $newPassword) {
+      $auth = Auth::instance();
+      return $auth->change_password($oldPassword, $newPassword);
+    }
+    
+    /**
+	   * Delete an user from the database
+	   * @param email the email of the user
+	   * @param password the password of the user
+	   * @return true if the delete process worked, otherwise false and an error message
+	   * @note this function uses the Auth package from FuelPHP
+	   */
+    public static function deleteUser($email, $password) {
+      //check the user credentials
+      $auth = Auth::instance();
+      if (!$auth->login($email, $password)) {
+        //if they are invalid, return an error message
+        return array(false, 'invalid username or password');
+      } else if ($auth->delete_user($email)) {
+        //if the delete process failed, return true
+        return array(true);
+      } else {
+        //if the delete process failed, return an error message
+        return array (false, 'Sorry, there was a problem. Please try again later');
+      }
+    }
 
     /**
      * Get all cities saved in the database

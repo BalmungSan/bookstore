@@ -29,8 +29,8 @@
   class Controller_User extends Controller_Common {
     /**
      * The edit page
-     * @access  public
-     * @return  Response
+     * @access public
+     * @return Response
      */
     public function action_edit() {
       //check if the user is logged
@@ -49,19 +49,57 @@
     
     /**
      * Edit the data of an user
-     * @access  post
-     * @return  Response
+     * @access post
+     * @return Response
      */
     public function post_edit() {
       //try to edit the user
       if (AuxUser::editUser()) {
-        //if the edit process worked
+        //if the edit process worked, redirect to the profile page
         echo '<script>alert("User data edited");</script>';
         Response::redirect('/profile');
       } else {
         //if not, print the error message
         echo '<script>alert("No data was updated, Please confirm that you change at least one field");</script>';
         Response::redirect('/user/edit', 'refresh');
+      }
+    }
+    
+    /**
+	   * Change the password of an user
+	   * @access post
+	   * @return Response
+	   */
+    public function post_changePassword() {
+      //try to change the password
+      $status = AuxUser::changePassword();
+      if ($status[0]) {
+        //if the password change process worked, redirect to the profile page
+        echo '<script>alert("Password Changed");</script>';
+        Response::redirect('/profile');
+      } else {
+        //if not, print the error message
+        echo '<script>alert("'.$status[1].'");</script>';
+        Response::redirect('/profile');
+      }
+    }
+    
+    /**
+	   * Delete an user account
+	   * @access post
+	   * @return Response
+	   */
+    public function post_delete() {
+      //try to delete the account
+      $status = AuxUser::deleteUser();
+      if ($status[0]) {
+        //if the delete user process worked, log out
+        echo '<script>alert("Password Changed");</script>';
+        Response::redirect('/profile/logOut');
+      } else {
+        //if not, print the error message
+        echo '<script>alert("'.$status[1].'");</script>';
+        Response::redirect('/profile');
       }
     }
   }
