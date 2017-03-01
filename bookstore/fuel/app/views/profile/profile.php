@@ -51,6 +51,15 @@
 
 		<div id="main">
 			<section id="content">
+			  <div id="upper">
+			    <h3>User Info</h3>
+		        <ul>
+		          <li><strong>Account:</strong> <?=$user['email']?></li>
+		          <li><strong>Name:</strong> <?=$user['name']?></li>
+		          <li><strong>City:</strong> <?=$user['city']?></li>
+		          <li><strong>Address:</strong> <?=$user['address']?></li>
+		        </ul>
+			  </div>
 				<div id="left">
 					<h3>My Books</h3>
 					<ul>

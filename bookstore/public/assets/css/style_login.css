@@ -53,10 +53,6 @@ a.hiddenanchor{
 /**** Styling the form elements **/
 
 /**** general text styling ****/
-#wrapper a{
-	color: rgb(95, 155, 198);
-	text-decoration: underline;
-}
 
 #wrapper h1{
 	font-size: 48px;

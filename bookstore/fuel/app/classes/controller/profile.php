@@ -18,6 +18,7 @@
   //Import the book model and dto
   use \Model\BookModel;
   use \Model\BookDTO;
+  use \Aux\User as AuxUser;
 
   /**
    * The Profile Controller.
@@ -41,6 +42,7 @@
   	    $booksDTO = BookModel::getBooksByUser($userId);
   	    $books = array_map(function ($b){return $b->toArray();}, $booksDTO);
   	    $view->books = $books;
+  	    $view->user = AuxUser::getUser();
   	    $categories = BookModel::getCategories();
         $view->categories = $categories;
         return $view;

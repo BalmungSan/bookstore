@@ -273,7 +273,7 @@ nav ul li a:hover, nav ul li.selected a {
 
 }
 
-#content #left, #content #rightUpper {
+#content #left, #content #rightUpper, #content #upper {
 
     border: 1px solid #E9E9E9;
 
@@ -282,7 +282,8 @@ nav ul li a:hover, nav ul li.selected a {
     margin: 0 2%;
 
     width: 70%;
-
+    
+    margin-bottom: 1%;
 }
 
 #content #rightUpper {
