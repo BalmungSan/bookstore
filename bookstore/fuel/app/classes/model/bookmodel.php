@@ -18,8 +18,9 @@
   //This class exists in the Model namespace
   namespace Model;
 
-  //Import the DB class
+  //Import the DB class and the Auth package
   use DB;
+  use Auth;
 
   /**
    * Represent the books table
@@ -71,8 +72,8 @@
         'is_new',
         'category_id',
         'price',
-		'preview',
-		'units'
+		    'preview',
+		    'units'
       );
 
       $values = array(
@@ -148,7 +149,7 @@
         $data[]  = $book['user_id'];
         $data[]  = $book['name'];
         $data[]  = $book['author'];
-		$data[]  = $book['is_new'];
+		    $data[]  = $book['is_new'];
         $data[]  = $book['category'];
         $data[]  = $book['price'];
         $data[]  = $book['preview'];
@@ -157,6 +158,18 @@
       }
 
       return $books;
+    }
+
+    /**
+     * Get all books of the current user
+     * @return an array of BookDTO with all books
+     * @note this function uses the Auth package from FuelPHP
+     * @see Auth
+     * @see BookDTO
+     * @see self::getBooksByUser($userId)
+     */
+    public static function getUserBooks() {
+      return self::getBooksByUser(Auth::instance()->get_user_id()[1]);
     }
 
     /**

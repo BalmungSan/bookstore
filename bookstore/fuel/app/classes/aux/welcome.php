@@ -37,7 +37,7 @@
 	   * Login an user
 	   * @access app
 	   * @return the user id of the given credentials or false if the credentials are invalid
-	   * @see UserModel::loginUser
+	   * @see UserModel::loginUser($email, $password)
 	   */
     public static function loginUser() {
 	    //get the user email and password
@@ -52,7 +52,7 @@
 	   * Register a new user in the database
 	   * @access app
 	   * @return a tuple of from (true, user id) if the register process succeed or (false, error) if not
-	   * @see UserModel::registerUser
+	   * @see UserModel::registerUser($user, $password)
 	   */
     public static function registerUser() {
 	    //get the user data
@@ -88,8 +88,8 @@
     /**
 	   * Get the list of all cities
 	   * @access app
-	   * @return an array with all the cities
-	   * @see UserModel::getCities
+	   * @return an array with the cities
+	   * @see UserModel::getCities()
 	   */
     public static function getCities() {
       return UserModel::getCities();

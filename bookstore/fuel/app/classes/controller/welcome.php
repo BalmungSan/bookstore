@@ -50,8 +50,8 @@
      * @note this is an aux method
      * @access private
      * @return Response
-     * @see this::post_checkUser
-     * @see this::post_registerUser
+     * @see self::post_checkUser()
+     * @see self::post_registerUser()
      */
     private function login($userId) {
       \Auth::remember_me($userId);
