@@ -134,7 +134,7 @@
 		    	echo '<script>alert("Book deleted");</script>';
 		    	Response::redirect('profile', 'refresh');
 				} else {
-					//if not, tell the user to change at least one field
+					//if not, print an error message
         	echo '<script>alert("You don\'t have the permissions to delete this book");</script>';
         	Response::redirect('/book/edit', 'refresh');
 				}

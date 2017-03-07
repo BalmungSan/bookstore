@@ -75,25 +75,25 @@
       $searchBy  = Input::post("searchBy");
       $resultDTO = null;
       switch ($searchBy) {
-        case 0:
+        case 'category':
           //search by category
           $category = Input::post("category");
           $resultDTO = BookModel::searchByCategory($category);
           break;
           
-        case 1:
+        case 'author':
           //search by author
           $author = Input::post("author");
           $resultDTO = BookModel::searchByAuthor($author);
           break;
           
-        case 2:
+        case 'name':
           //search by name
           $name = Input::post("name");
           $resultDTO = BookModel::searchByName($name);
           break;
           
-        case 3:
+        case 'price':
           //search by price
           $priceL = Input::post("priceL");
           $priceU = Input::post("priceU");

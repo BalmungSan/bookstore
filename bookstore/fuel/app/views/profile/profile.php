@@ -92,15 +92,15 @@
 				<div id="rightUpper">
 					<h3>Search By:</h3>
 					<form id="search_form" method="post" name="search_form" autocomplete="on" action="profile/search">
-						<input id="r2" type="radio" name="searchBy" value=2 onclick="search()" checked> Name<br>
+						<input id="r2" type="radio" name="searchBy" value="name" onclick="search()" checked> Name<br>
 					  <input id="name" name="name" class="form-control" placeholder="Las Mil y una Noches" style="display: block;"/>
-					  <input id="r0" type="radio" name="searchBy" value=0 onclick="search()"> Category<br>
+					  <input id="r0" type="radio" name="searchBy" value="category" onclick="search()"> Category<br>
             <select id="categorynewbook" name="category" class="form-control" style="display: none;">
 	          <?php foreach ($categories as $category) {echo "<option value='".$category."'>".$category."</option>";}?>
 	          </select>
-						<input id="r1" type="radio" name="searchBy" value=1 onclick="search()"> Author<br>
+						<input id="r1" type="radio" name="searchBy" value="author" onclick="search()"> Author<br>
 					  <input id="author" name="author" class="form-control"  placeholder="Edgar Allan Poe" style="display: none;"/>
-						<input id="r3" type="radio" name="searchBy" value=3 onclick="search()"> Price<br>
+						<input id="r3" type="radio" name="searchBy" value="price" onclick="search()"> Price<br>
 						<div id="prices" style="display: none;">
 							<input type="number" id="priceL" name="priceL" class="form-control"  placeholder="$60000"/>
 					  	<input type="number" id="priceU" name="priceU" class="form-control"  placeholder="$170000"/>
