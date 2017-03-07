@@ -18,55 +18,54 @@
   /**
    * Add and edit book form
    */
-  echo Form::open(array('method' => 'post', 'autocomplete' => 'on', 'id' => 'form_id', 'enctype' => 'multipart/form-data'));
-  echo Form::hidden('userid', $userId, array('required' => 'required'));
+  echo Form::open(array('method' => 'post', 'autocomplete' => 'on', 'id' => 'form_id', 'enctype' => 'multipart/form-data'), array('useridbook' => $userId));
 
   //name
   echo '<p>';
-    echo Form::label('Name ', 'namenewbook', array('class' =>'uname', 'data-icon' => 'b'));
-    echo Form::input('namenewbook', isset($book) ? $book['name'] : '', array('required' => 'required', 'type' => 'text', 'placeholder'=>'SpeakOut Upper Intermediate'));
+    echo Form::label('Name ', 'namebook', array('class' =>'uname', 'data-icon' => 'b'));
+    echo Form::input('namebook', isset($book) ? $book['name'] : '', array('required' => 'required', 'type' => 'text', 'placeholder'=>'SpeakOut Upper Intermediate'));
   echo '</p>';
 
   //category
   echo '<p>';
-    echo Form::label('Category', 'categorynewbook', array('class'=>'uname', 'data-icon'=>'c'));
-    echo Form::select('categorynewbook', isset($book) ? $book['category'] : $categories[0], array_combine($categories, $categories), array('id' => 'citysignup'));
+    echo Form::label('Category', 'categorybook', array('class'=>'uname', 'data-icon'=>'c'));
+    echo Form::select('categorybook', isset($book) ? $book['category'] : $categories[0], array_combine($categories, $categories), array('id' => 'citysignup'));
   echo '</p>';
 
   //author
   echo '<p>';
-    echo Form::label('Author', 'authornewbook', array('class'=>'uname', 'data-icon'=>'u'));
-    echo Form::input('authornewbook', isset($book) ? $book['author'] : '', array('required'=>'required','pattern'=>'[a-zA-Z _-]+$', 'type'=>'text', 'placeholder'=>'France Eales'));
+    echo Form::label('Author', 'authorbook', array('class'=>'uname', 'data-icon'=>'u'));
+    echo Form::input('authorbook', isset($book) ? $book['author'] : '', array('required'=>'required','pattern'=>'[a-zA-Z _-]+$', 'type'=>'text', 'placeholder'=>'France Eales'));
   echo '</p>';
 
   //price
   echo '<p>';
-    echo Form::label('Price', 'pricenewbook', array('class'=>'uname', 'data-icon'=>'d'));
-    echo Form::input('pricenewbook', isset($book) ? $book['price'] : '', array('required'=>'required', 'required pattern'=>'[0-9]', 'type'=>'number', 'placeholder'=>'160.000'));
+    echo Form::label('Price', 'pricebook', array('class'=>'uname', 'data-icon'=>'d'));
+    echo Form::input('pricebook', isset($book) ? $book['price'] : '', array('required'=>'required', 'required pattern'=>'[0-9]', 'type'=>'number', 'placeholder'=>'160.000'));
   echo '</p>';
 
   //units
   echo '<p>';
-    echo Form::label('Units', 'unitsnewbook', array('class'=>'uname', 'data-icon'=>'n'));
-    echo Form::input('unitsnewbook', isset($book) ? $book['units'] : '', array('required'=>'required', 'pattern'=>'[0-9]', 'type' =>'number', 'placeholder'=>'4'));
+    echo Form::label('Units', 'unitsbook', array('class'=>'uname', 'data-icon'=>'n'));
+    echo Form::input('unitsbook', isset($book) ? $book['units'] : '', array('required'=>'required', 'pattern'=>'[0-9]', 'type' =>'number', 'placeholder'=>'4'));
   echo '</p>';
 
   //is new
   echo '<P>';
-    echo Form::label('Is New?', 'isnewnewbook', array('class'=>'uname'));
+    echo Form::label('Is New?', 'isnewbook', array('class'=>'uname'));
     echo '<P>';
-      echo Form::radio('isnew', '1', isset($book) && !$book['isNew'] ? false : true);
-      echo Form::label(' New ', 'isnew');
+      echo Form::radio('isnewbook', '1', isset($book) && !$book['isNew'] ? false : true);
+      echo Form::label(' New ', 'isnewbook');
       echo '<br>';
-      echo Form::radio('isnew', '0', isset($book) && !$book['isNew'] ? true : false);
-      echo Form::label(' Second Hand ', 'isnew');
+      echo Form::radio('isnewbook', '0', isset($book) && !$book['isNew'] ? true : false);
+      echo Form::label(' Second Hand ', 'isnewbook');
     echo '</p>';
   echo '</P>';
 
   //preview
   echo '<p>';
-    echo Form::label('Preview', 'pewviewnewbook', array('class'=>'uname', 'data-icon' => 'f'));
-    echo Form::file('previewnewbook',  array('size'=>'500', 'required'=>'required'));
+    echo Form::label('Preview', 'previewbook', array('class'=>'uname', 'data-icon' => 'f'));
+    echo Form::file('previewbook',  array('size'=>'500', 'required'=>'required'));
   echo '</p>';
 
   //back & submit

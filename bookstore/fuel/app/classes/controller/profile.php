@@ -79,23 +79,6 @@
 	  }
 	
 	  /**
-     * Delete a book
-     * @access  post
-     * @return  Response
-     */
-	  public function action_deleteBook($bookId) {
-	    //check if the user is logged
-      if ($this->checkLogin()) {
-        //if yes, call the delete book of the book controller
-	      Response::redirect("book/delete/".$bookId."/");
-      } else {
-        //if not, go to the loggin page
-        echo '<script>alert("You have to Log In first");</script>';
-        Response::redirect('/', 'refresh');
-      }
-	  }
-	
-	  /**
      * Logout
      * @access  public
      * @return  Response

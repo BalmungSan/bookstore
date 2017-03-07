@@ -21,8 +21,10 @@
   //import the book model and dto
   use \Model\BookModel;
   use \Model\BookDTO;
-  //import the input class
+  //import the input, upload and file classes
   use \Input;
+  use \Upload;
+  use \File;
   
   /**
    * The Book Aux Class.
@@ -105,6 +107,129 @@
       }
       
       return self::toBooksArray($resultDTO);
+    }
+
+    /**
+	   * Get a book
+	   * @param BookId the id of the book to retrieve
+	   * @access app
+	   * @return an array with all book data
+	   * @see BookModel::registerBook($book)
+	   * @see BookDTO::toArray()
+	   */
+    public static function getBook($bookId) {
+      return BookModel::getBook($bookId)->toArray();
+    }
+    
+    /**
+	   * Register a new book in the database
+	   * @access app
+	   * @return true on success, false otherwise
+	   * @see BookModel::registerBook($book)
+	   */
+    public static function createBook() {
+      //config for files
+		  $config = array(
+		  	'path' => 'books/',
+	      'change_case' => 'lower',
+	    	'normalize' => true,
+	      'auto_process' => true,
+	      'normalize_separator' => '-',
+	      'ext_whitelist' => array('pdf')
+	    );
+	    Upload::process($config);
+
+    	//check if there are valid files
+    	if (Upload::is_valid()) {
+    		//save them according to the config
+	    	Upload::save();
+
+	    	//grab the file name of the preview
+	    	$preview = Upload::get_files()[0]['saved_as'];
+    	}
+
+		  //set the book data
+		  $book = new BookDTO();
+		  $book->setUser(Input::post('useridbook'));
+		  $book->setName(Input::post('namebook'));
+		  $book->setAuthor(Input::post('authorbook'));
+		  $book->setIsNew(Input::post('isnewbook'));
+		  $book->setCategory(Input::post('categorybook'));
+		  $book->setPrice(Input::post('pricebook'));
+		  $book->setPreview($preview);
+		  $book->setUnits(Input::post('unitsbook'));
+		  
+		  //save the book in the database
+		  return BookModel::registerBook($book);
+    }
+
+    /**
+	   * Edit the data of a book
+	   * @param bookId the id of the book to update
+	   * @access app
+	   * @return true on success, false otherwise
+	   * @see BookModel::updateBook($book)
+	   */     
+    public static function editBook($bookId) {
+      //check that the user editing this book is the owner of the book
+			$book = BookModel::getBook($bookId);
+			if ($book->getUser() != Input::post('useridbook')) {
+			  return false;
+			}
+	
+		  //config for files
+		  $config = array(
+		  	'path' => 'books/',
+	      'change_case' => 'lower',
+	      'normalize' => true,
+	      'auto_process' => true,
+	      'normalize_separator' => '-',
+	      'ext_whitelist' => array('pdf'),
+	    );
+	    Upload::process($config);
+
+      //check if there are valid files
+      if (Upload::is_valid()) {
+		    //save them according to the config
+		    Upload::save();
+	
+		    //grab the file name of the preview
+		    $preview = Upload::get_files()[0]['saved_as'];
+      }
+
+      //delete the old preview
+      File::delete("books/".$book->getPreview());
+
+		  //set the book data
+		  $book->setName(Input::post('namebook'));
+		  $book->setAuthor(Input::post('authorbook'));
+		  $book->setIsNew(Input::post('isnewbook'));
+		  $book->setCategory(Input::post('categorybook'));
+		  $book->setPrice(Input::post('pricebook'));
+		  $book->setPreview($preview);
+		  $book->setUnits(Input::post('unitsbook'));
+		  
+		  //update the book in the database
+		  return BookModel::updateBook($book);
+    }
+    
+    /**
+	   * Delete a book
+	   * @param bookId the id of the book to delete
+	   * @access app
+	   * @return true on success, false otherwise
+	   * @see BookModel::updateBook($book)
+	   */      
+    public static function deleteBook($bookId) {
+      //check that the user deleting this book is the owner of the book
+			$book = BookModel::getBook($bookId);
+			if ($book->getUser() != Input::post('useridbook')) {
+			  return false;
+			}
+			
+	    //delete the preview and the book from the database
+		  File::delete("books/".$book->getPreview());
+		  return BookModel::deleteBook($bookId);
     }
     
     /**

@@ -67,7 +67,7 @@
 						<li>
 							<div class="well" id="book">
 								<div class="info">
-									<a class="title"><?=utf8_encode($book['name'])?></a>
+									<a class="title"><?=$book['name']?></a>
 									<div id="info<?=$book['id']?>">
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Author: </span><strong><?=$book['author']?></strong></p>
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Category: </span><strong><?=$book['category']?></strong></p>
@@ -76,8 +76,12 @@
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st"><a href="books/<?=$book['preview']?>" target="_blank">Preview</a></span></p>
 									</div>
 									<div class="actions">
-										<button type="button" class="btn btn-info details" onclick="window.location.href='profile/editBook/<?=$book['id']?>';"><strong>Edit</strong></button>
-										<button type="button" class="btn btn btn-danger" onclick="window.location.href='profile/deleteBook/<?=$book['id']?>';"><strong>Delete</strong></button>
+										<button type="button" class="btn btn-info details" onclick="window.location.href='profile/editBook/<?=$book['id']?>';">Edit</button>
+										<?php
+										  echo Form::open(array('method' => 'post', 'id' => 'form_id', 'enctype' => 'multipart/form-data', 'action' => 'book/delete/'.$book['id']), array('useridbook' => $user['id']));
+                      echo Form::submit('submit', 'Delete', array('class' =>'btn btn btn-danger'));
+                      echo Form::close();
+										?>
 									</div>
 								</div>
 							</div>
