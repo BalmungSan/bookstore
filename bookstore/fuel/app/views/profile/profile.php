@@ -67,7 +67,7 @@
 						<li>
 							<div class="well" id="book">
 								<div class="info">
-									<a class="title"><?=utf8_encode($book['name'])?></a>
+									<a class="title"><?=$book['name']?></a>
 									<div id="info<?=$book['id']?>">
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Author: </span><strong><?=$book['author']?></strong></p>
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st">Category: </span><strong><?=$book['category']?></strong></p>
@@ -76,8 +76,12 @@
 										<p style="font-size: 17px; margin-top: 15px;"><span class="st"><a href="books/<?=$book['preview']?>" target="_blank">Preview</a></span></p>
 									</div>
 									<div class="actions">
-										<button type="button" class="btn btn-info details" onclick="window.location.href='profile/editBook/<?=$book['id']?>';"><strong>Edit</strong></button>
-										<button type="button" class="btn btn btn-danger" onclick="window.location.href='profile/deleteBook/<?=$book['id']?>';"><strong>Delete</strong></button>
+										<button type="button" class="btn btn-info details" onclick="window.location.href='profile/editBook/<?=$book['id']?>';">Edit</button>
+										<?php
+										  echo Form::open(array('method' => 'post', 'id' => 'form_id', 'enctype' => 'multipart/form-data', 'action' => 'book/delete/'.$book['id']), array('useridbook' => $user['id']));
+                      echo Form::submit('submit', 'Delete', array('class' =>'btn btn btn-danger'));
+                      echo Form::close();
+										?>
 									</div>
 								</div>
 							</div>
@@ -88,15 +92,15 @@
 				<div id="rightUpper">
 					<h3>Search By:</h3>
 					<form id="search_form" method="post" name="search_form" autocomplete="on" action="profile/search">
-						<input id="r2" type="radio" name="searchBy" value=2 onclick="search()" checked> Name<br>
+						<input id="r2" type="radio" name="searchBy" value="name" onclick="search()" checked> Name<br>
 					  <input id="name" name="name" class="form-control" placeholder="Las Mil y una Noches" style="display: block;"/>
-					  <input id="r0" type="radio" name="searchBy" value=0 onclick="search()"> Category<br>
+					  <input id="r0" type="radio" name="searchBy" value="category" onclick="search()"> Category<br>
             <select id="categorynewbook" name="category" class="form-control" style="display: none;">
 	          <?php foreach ($categories as $category) {echo "<option value='".$category."'>".$category."</option>";}?>
 	          </select>
-						<input id="r1" type="radio" name="searchBy" value=1 onclick="search()"> Author<br>
+						<input id="r1" type="radio" name="searchBy" value="author" onclick="search()"> Author<br>
 					  <input id="author" name="author" class="form-control"  placeholder="Edgar Allan Poe" style="display: none;"/>
-						<input id="r3" type="radio" name="searchBy" value=3 onclick="search()"> Price<br>
+						<input id="r3" type="radio" name="searchBy" value="price" onclick="search()"> Price<br>
 						<div id="prices" style="display: none;">
 							<input type="number" id="priceL" name="priceL" class="form-control"  placeholder="$60000"/>
 					  	<input type="number" id="priceU" name="priceU" class="form-control"  placeholder="$170000"/>

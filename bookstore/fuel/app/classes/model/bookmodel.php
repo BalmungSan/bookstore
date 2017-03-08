@@ -56,7 +56,7 @@
     /**
      * Create a new book in the database
      * @param book a BookDTO with all the data of the book
-     * @return 1 on success 0 on failure
+     * @return true on success false on failure
      * @note this function sets the id for the new book if succeed
      * @see BookDTO
      */
@@ -94,16 +94,16 @@
       //check if the insert succeed
       if ($result[1] == 1) {
         $book->setId($result[0]);
-        return 1;
+        return true;
       } else {
-        return 0;
+        return false;
       }
     }
 
     /**
      * Update a book data
      * @param book a BookDTO with the id of the book to update and the modified data
-     * @return 1 if at least one field is changed, else 0
+     * @return true if at least one field is changed, else false
      * @see BookDTO
      */
     public static function updateBook($book) {
@@ -122,17 +122,17 @@
       );
 
       //update the data
-      return DB::update('books')->set($set)->where('book_id', '=', $book->getId())->execute();
+      return DB::update('books')->set($set)->where('book_id', '=', $book->getId())->execute() == 1;
     }
 
     /**
      * Drop a book from the database
      * @param book the id of the book to delete
-     * @return 1 on success 0 on failure
+     * @return true on success false on failure
      */
     public static function deleteBook($book) {
       //delete the book
-      return DB::delete('books')->where('book_id', '=', $book)->execute();
+      return DB::delete('books')->where('book_id', '=', $book)->execute() == 1;
     }
 
     /**

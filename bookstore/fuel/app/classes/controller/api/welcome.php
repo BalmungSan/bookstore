@@ -67,7 +67,7 @@
     /**
      * Get the list of all cities
 	   * @access post
-	   * @return a json with all cities
+	   * @return a json with the cities
      */
     public function post_getCities() {
       return $this->response(array('cities' => AuxWelcome::getCities()));
