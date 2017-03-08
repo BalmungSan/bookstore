@@ -107,7 +107,7 @@
 					</form>
 				</div>
 				<div id="rightDown">
-					<h3>Actios:</h3>
+					<h3>Actions:</h3>
 					<?php
 					  echo Html::anchor('book/create', 'Add New Book', array('class' => 'btn btn-success', 'id' => 'btnAddBook'));
 					  echo Html::anchor('user/edit', 'Edit Profile', array('class' => 'btn btn-success', 'id' => 'btnEditProfile'));
