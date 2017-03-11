@@ -161,6 +161,57 @@
 		  
 		  //save the book in the database
 		  return BookModel::registerBook($book);
+
+      // create an ftp object, but don't connect
+      $ftp = Ftp::forge(array(
+      'hostname' => getenv('FTP_HOST_M'),
+      'username' => 'user',
+      'password' => 'bookstore',
+      'timeout'  => 90,
+      'port'     => getenv('FTP_PORT'),
+      'passive'  => true,
+      'ssl_mode' => false,
+      'debug'    => false
+      ), false);
+
+      //ftp object2, slave 1
+      $ftp2 = Ftp::forge(array(
+      'hostname' => getenv('FTP_HOST_S1'),
+      'username' => 'user',
+      'password' => 'bookstore',
+      'timeout'  => 90,
+      'port'     => getenv('FTP_PORT'),
+      'passive'  => true,
+      'ssl_mode' => false,
+      'debug'    => false
+      ), false);
+
+      $ftp3 = Ftp::forge(array(
+      'hostname' => getenv('FTP_HOST_S2'),
+      'username' => 'user',
+      'password' => 'bookstore',
+      'timeout'  => 90,
+      'port'     => getenv('FTP_PORT'),
+      'passive'  => true,
+      'ssl_mode' => false,
+      'debug'    => false
+      ), false);
+
+      // now connect to the server
+      if($ftp->connect();){
+        // Upload the book 
+        $ftp->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        $ftp->close();
+      }elseif($ftp2->connect();){
+        $ftp2->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        $ftp2->close();
+      }elseif($ftp3->connect();){
+        $ftp3->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        $ftp3->close();
+      }else{
+        $message = "Failed to connect to the FTP servers. Try again or later";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+      }
     }
 
     /**
@@ -211,6 +262,41 @@
 		  
 		  //update the book in the database
 		  return BookModel::updateBook($book);
+
+      if($ftp->connect();){
+      // delete a file
+      if ( ! $ftp->delete_file('books/' + $book->getName() + '.pdf')
+      {
+        if($ftp2->connect();){
+        // delete a file
+        if ( ! $ftp2->delete_file('books/' + $book->getName() + '.pdf')
+        {
+          if($ftp3->connect();){
+          // delete a file
+          if ( ! $ftp3->delete_file('books/' + $book->getName() + '.pdf')
+          {
+          //delete failed
+            $message = "Failed to connect to the FTP servers. Try again or later";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+          }
+        }
+      }
+    
+
+      if($ftp->connect();){
+        // Upload the book 
+        $ftp->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        $ftp->close();
+      }elseif($ftp2->connect();){
+        $ftp2->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        $ftp2->close();
+      }elseif($ftp3->connect();){
+        $ftp3->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        $ftp3->close();
+      }else{
+        $message = "Failed to connect to the FTP servers. Try again or later";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+      }
     }
     
     /**
@@ -226,10 +312,30 @@
 			if ($book->getUser() != Input::post('useridbook')) {
 			  return false;
 			}
-			
-	    //delete the preview and the book from the database
+
+    //delete the preview and the book from the database
 		  File::delete("books/".$book->getPreview());
 		  return BookModel::deleteBook($bookId);
+    
+
+      if($ftp->connect();){
+      // delete a file
+      if ( ! $ftp->delete_file('books/' + $book->getName() + '.pdf')
+      {
+        if($ftp2->connect();){
+        // delete a file
+        if ( ! $ftp2->delete_file('books/' + $book->getName() + '.pdf')
+        {
+          if($ftp3->connect();){
+          // delete a file
+          if ( ! $ftp3->delete_file('books/' + $book->getName() + '.pdf')
+          {
+          //delete failed
+            $message = "Failed to connect to the FTP servers. Try again or later";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+          }
+        }
+      }
     }
     
     /**
