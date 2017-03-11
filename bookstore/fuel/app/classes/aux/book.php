@@ -186,6 +186,7 @@
       'debug'    => false
       ), false);
 
+      //ftp object3, slave 2
       $ftp3 = Ftp::forge(array(
       'hostname' => getenv('FTP_HOST_S2'),
       'username' => 'user',
@@ -264,15 +265,15 @@
 		  return BookModel::updateBook($book);
 
       if($ftp->connect();){
-      // delete a file
+      // delete a file in master
       if ( ! $ftp->delete_file('books/' + $book->getName() + '.pdf')
       {
         if($ftp2->connect();){
-        // delete a file
+        // delete a file in slave 1
         if ( ! $ftp2->delete_file('books/' + $book->getName() + '.pdf')
         {
           if($ftp3->connect();){
-          // delete a file
+          // delete a file in slave 2
           if ( ! $ftp3->delete_file('books/' + $book->getName() + '.pdf')
           {
           //delete failed
@@ -284,13 +285,15 @@
     
 
       if($ftp->connect();){
-        // Upload the book 
+        // Upload the book in master
         $ftp->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
         $ftp->close();
       }elseif($ftp2->connect();){
+        // Upload the book in slave 1
         $ftp2->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
         $ftp2->close();
       }elseif($ftp3->connect();){
+        // Upload the book in slave 2
         $ftp3->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
         $ftp3->close();
       }else{
@@ -319,15 +322,15 @@
     
 
       if($ftp->connect();){
-      // delete a file
+      // delete a file in master
       if ( ! $ftp->delete_file('books/' + $book->getName() + '.pdf')
       {
         if($ftp2->connect();){
-        // delete a file
+        // delete a file in slave 1
         if ( ! $ftp2->delete_file('books/' + $book->getName() + '.pdf')
         {
           if($ftp3->connect();){
-          // delete a file
+          // delete a file in slave 2
           if ( ! $ftp3->delete_file('books/' + $book->getName() + '.pdf')
           {
           //delete failed
