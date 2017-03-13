@@ -115,9 +115,13 @@
 					<?php
 					  echo Html::anchor('book/create', 'Add New Book', array('class' => 'btn btn-success', 'id' => 'btnAddBook'));
 					  echo Html::anchor('user/edit', 'Edit Profile', array('class' => 'btn btn-success', 'id' => 'btnEditProfile'));
-					  echo Html::anchor('user/changePassword', 'Change Password', array('class' => 'btn btn-info', 'id' => 'btnChangePassword'));
-					  echo Html::anchor('user/delete', 'Delete Account', array('class' => 'btn btn-danger', 'id' => 'btnDeleteProfile'));
+					  //echo Html::anchor('user/changePassword', 'Change Password', array('class' => 'btn btn-info', 'id' => 'btnChangePassword'));
+					  //echo Html::anchor('user/delete', 'Delete Account', array('class' => 'btn btn-danger', 'id' => 'btnDeleteProfile'));
 					?>
+					<button class="btn btn-info" id="btnChangePassword" onclick="changepass()">Change Password
+					</button>
+					<button class="btn btn-danger" id="btnDeleteProfile" onclick="deleteprofile()">Delete Profile
+					</button>
 				</div>
 			</section>
 		</div>

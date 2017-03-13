@@ -51,3 +51,49 @@ function search(){
         }
     }
 }
+
+function changepass(){
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "user/changePassword");
+    
+    var currentpass = prompt("Please enter your current password", "Current Password");
+    var currentPassword = document.createElement("input");
+    currentPassword.setAttribute("type", "hidden");
+    currentPassword.setAttribute("name", "password");
+    currentPassword.setAttribute("value", currentpass);
+    form.appendChild(currentPassword);
+    
+    var newpass = prompt("Please enter your new password", "New Password");
+    var newPassword = document.createElement("input");
+    newPassword.setAttribute("type", "hidden");
+    newPassword.setAttribute("name", "newpassword");
+    newPassword.setAttribute("value", newpass);
+    form.appendChild(newPassword);
+    
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function deleteprofile(){
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "user/delete");
+    
+    var email = prompt("Please enter your current email Address", "Email");
+    var emailAddress = document.createElement("input");
+    emailAddress.setAttribute("type", "hidden");
+    emailAddress.setAttribute("name", "email");
+    emailAddress.setAttribute("value", emailAddress);
+    form.appendChild(emailAddress);
+    
+    var pass = prompt("Please enter your password", "Password");
+    var password = document.createElement("input");
+    password.setAttribute("type", "hidden");
+    password.setAttribute("name", "password");
+    password.setAttribute("value", pass);
+    form.appendChild(password);
+    
+    document.body.appendChild(form);
+    form.submit();
+}
