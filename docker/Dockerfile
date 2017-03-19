@@ -41,6 +41,3 @@ RUN rm -rf bookstore
 
 #Giving ownership of application files to the apache user
 RUN chown -R www-data:www-data /var/www/bookstore
-
-#Volme for saving book previews
-VOLUME "/var/www/bookstore/public/books/"
