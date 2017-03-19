@@ -163,7 +163,7 @@ class Book {
     return BookModel::registerBook($book);
 
     // now connect to the server
-    if($ftp->connect();){
+    if($ftp->forge()){
       // Upload the book
       $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
       $ftp->close();
@@ -218,17 +218,19 @@ class Book {
     $book->setPreview($preview);
     $book->setUnits(Input::post('unitsbook'));
 
-    if($ftp->connect()){
+    if($ftp->forge()){
       // delete a file in any of the ftp servers
       if ( ! $ftp->delete_file('books/' . $book->getName()){
         //delete failed
         return false;
+      }else{
+        ftp->close();
       }
     }else{
       return false;
     }
 
-    if($ftp->connect()){
+    if($ftp->forge()){
       // Upload the book to update it
       $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
       $ftp->close();
@@ -237,9 +239,6 @@ class Book {
     }
     //update the book in the database
     return BookModel::updateBook($book);
-
-    
-
 
 /**
  * Delete a book
@@ -255,22 +254,22 @@ public static function deleteBook($bookId) {
     return false;
   }
 
-  if($ftp->connect()){
+  if($ftp->forge()){
     // delete a file in any of the ftp servers
     if ( ! $ftp->delete_file('books/' . $book->getName()){
       //delete failed
       return false;
+    }else{
+    ftp->close();
+    }
   }else{
-    return false;  
+    return false;
   }      
 
   //delete the preview and the book from the database
   File::delete("books/".$book->getPreview());
   return BookModel::deleteBook($bookId);
-
-
-  
-
+ 
 /**
  * Get the list of all book categories
  * @access app
