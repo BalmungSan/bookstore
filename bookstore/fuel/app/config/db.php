@@ -14,32 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 /**
  * Database Configuration
  */
 return array (
-	//make sure mysql is the default configuration
-    'active' => 'mysql',
+  //make sure mysql is the default configuration
+  'active' => 'mysql',
 
-	//the mysql connection configuration, using mysqli
-	'mysql' => array(
-	    'type'           => 'mysqli',
-	    'connection'     => array(
-	        'hostname'       => getenv('MYSQL_HOST'),
-	        'port'           => getenv('MYSQL_PORT'),
-	        'database'       => 'bookstore',
-	        'username'       => 'bookstore',
-	        'password'       => 'bookstore',
-	        'persistent'     => true,
-	        'compress'       => true
-	    ),
-	    'identifier'     => '`',
-	    'table_prefix'   => '',
-	    //'charset'        => 'utf8',
-	    'enable_cache'   => true,
-	    'profiling'      => false,
-	    'readonly'       => false
-	)
+  //the mysql connection configuration, using mysqli
+  'mysql' => array(
+    'type'           => 'mysqli',
+    'connection'     => array(
+      'hostname'       => getenv('MYSQL_HOST'),
+      'port'           => getenv('MYSQL_PORT'),
+      'database'       => 'bookstore',
+      'username'       => 'bookstore',
+      'password'       => 'bookstore',
+      'persistent'     => true,
+      'compress'       => true
+    ),
+    'identifier'     => '`',
+    'table_prefix'   => '',
+    //'charset'        => 'utf8',
+    'enable_cache'   => true,
+    'profiling'      => false,
+    'readonly'       => false
+  )
 );
 ?>

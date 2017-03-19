@@ -1,24 +1,22 @@
 <!--
-  Copyright 2017 BookStore
+     Copyright 2017 BookStore
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
 -->
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-
-</html>
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Add a book BookStore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,22 +26,22 @@
     <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
     <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <header>
-            <h1>BookStore</h1>
-        </header>
+      <header>
+        <h1>BookStore</h1>
+      </header>
 
-        <div id="container_demo" >
-            <div id="wrapper">
-                <div id="login" class="animate form">
-                    <h1> Add book </h1>
-                    <?php echo render('book/_form', $data); ?>
-                </div>
-            </div>
+      <div id="container_demo" >
+        <div id="wrapper">
+          <div id="login" class="animate form">
+            <h1> Add book </h1>
+            <?php echo render('book/_form', $data); ?>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

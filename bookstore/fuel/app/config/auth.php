@@ -19,14 +19,14 @@
  * Authentication configuration
  */
 return array(
-    //only use the simple auth driver
-    'driver' => array('Simpleauth'),
-    'verify_multiple_logins' => false,
+  //only use the simple auth driver
+  'driver' => array('Simpleauth'),
+  'verify_multiple_logins' => false,
 
-    //password hashing salt
-    'salt' => '52EisqJac31QyK6Uacng',
-    
-    //password hashing iterations
-    'iterations' => '10000',
+  //password hashing salt
+  'salt' => '52EisqJac31QyK6Uacng',
+
+  //password hashing iterations
+  'iterations' => '10000',
 );
 ?>

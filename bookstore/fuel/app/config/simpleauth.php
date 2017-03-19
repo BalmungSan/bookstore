@@ -19,29 +19,29 @@
  * SimpleAuth driver configuration
  */
 return array(
-    //user table configuration
-    'db_connection' => 'mysql',
-    'table_name' => 'users',
-    'table_columns' => array('*'),
-    
-    //no guest login and no multiple logins
-    'guest_login' => false,
-    'multiple_logins' => false,
-    
-    //login configuration
-    'username_post_key' => 'emaillogin',
-    'password_post_key' => 'passwordlogin',
-    'login_hash_salt' => '3wXhNjtvaASQ3KPc1dq5',
-    
-    //remenber me configuration
-    'remember_me' => array(
-        'enabled' => true,
-        'cookie_name' => 'bookstore_login',
-        'expiration' => 3600
-    ),
-    
-    //groups and roles (None)
-    'groups' => array(),
-    'roles' => array()
+  //user table configuration
+  'db_connection' => 'mysql',
+  'table_name' => 'users',
+  'table_columns' => array('*'),
+
+  //no guest login and no multiple logins
+  'guest_login' => false,
+  'multiple_logins' => false,
+
+  //login configuration
+  'username_post_key' => 'emaillogin',
+  'password_post_key' => 'passwordlogin',
+  'login_hash_salt' => '3wXhNjtvaASQ3KPc1dq5',
+
+  //remenber me configuration
+  'remember_me' => array(
+    'enabled' => true,
+    'cookie_name' => 'bookstore_login',
+    'expiration' => 3600
+  ),
+
+  //groups and roles (None)
+  'groups' => array(),
+  'roles' => array()
 );
 ?>
