@@ -260,7 +260,7 @@ public static function deleteBook($bookId) {
       //delete failed
       return false;
     }else{
-    ftp->close();
+      ftp->close();
     }
   }else{
     return false;

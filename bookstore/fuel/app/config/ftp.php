@@ -15,18 +15,20 @@
  * limitations under the License.
  */
 
+/**
+ * FTP Configuration file
+ */
 return array(
-	// create an ftp object, but don't connect
-    // FTP_HOST and FTP_PORT are enviroment variables
-    $ftp = Ftp::forge(array(
-      'hostname' => getenv('FTP_HOST'),
-      'username' => 'user',
-      'password' => 'bookstore',
-      'timeout'  => 90,
-      'port'     => getenv('FTP_PORT'),
-      'passive'  => true,
-      'ssl_mode' => false,
-      'debug'    => false
-    ),
-
+  // FTP_HOST and FTP_PORT are enviroment variables
+  'default' => array(
+    'hostname' => getenv('FTP_HOST'),
+    'username' => 'user',
+    'password' => 'bookstore',
+    'timeout'  => 90,
+    'port'     => getenv('FTP_PORT'),
+    'passive'  => true,
+    'ssl_mode' => false,
+    'debug'    => false
+  )
 );
+?>
