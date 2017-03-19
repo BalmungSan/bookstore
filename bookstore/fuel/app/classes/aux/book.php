@@ -225,7 +225,7 @@ class Book {
         //delete failed
         return false;
       } else {
-        ftp->close();
+        $ftp->close();
       }
     } else {
       return false;
@@ -263,7 +263,7 @@ class Book {
         //delete failed
         return false;
       } else {
-        ftp->close();
+        $ftp->close();
         return true;
       }
     } else {
