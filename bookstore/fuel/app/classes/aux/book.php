@@ -164,7 +164,7 @@ class Book {
     $ftp = FTP::forge();
 
     //upload the book
-    if ($ftp->upload('books/' . $preview, getenv('FTP_DIR') . $preview, auto , 0444)) {
+    if ($ftp->upload('books/' . $preview, getenv('FTP_DIR') . $preview, 'auto', 0444)) {
       //delete the temporary copy of the file
       File::delete("books/" . $preview);
       $ftp->close();
@@ -227,7 +227,7 @@ class Book {
 
 
     // Upload the book to update it
-    if ($ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666)) {
+    if ($ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), 'auto', 0444)) {
       //delete the temporary copy of the file
       File::delete("books/" . $preview);
       $ftp->close();

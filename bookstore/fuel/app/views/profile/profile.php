@@ -73,7 +73,7 @@
                         <p style="font-size: 17px; margin-top: 15px;"><span class="st">Category: </span><strong><?=$book['category']?></strong></p>
                         <p style="font-size: 17px; margin-top: 15px;"><span class="st">Units: </span><strong><?=$book['units']?></strong></p>
                         <p style="font-size: 17px; margin-top: 15px;"><span class="st">Price: </span><strong>$<?=$book['price']?></strong></p>
-                        <p style="font-size: 17px; margin-top: 15px;"><span class="st"><?=echo Html::anchour("http://" . getenv('FTP_HOST') . '/' . $book['preview'], 'View', array('target' => '_blank'))?></span></p>
+                        <p style="font-size: 17px; margin-top: 15px;"><span class="st"><?=Html::anchor("http://" . getenv('FTP_HOST') . '/' . $book['preview'], 'View', array('target' => '_blank'))?></span></p>
                       </div>
                       <div class="actions">
                         <button type="button" class="btn btn-info details" onclick="window.location.href='profile/editBook/<?=$book['id']?>';">Edit</button>
