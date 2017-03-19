@@ -21,9 +21,10 @@ namespace Aux;
 //import the book model and dto
 use \Model\BookModel;
 use \Model\BookDTO;
-//import the input, upload and file classes
+//import the input, upload, FTP and file classes
 use \Input;
 use \Upload;
+use \FTP;
 use \File;
 
 /**
@@ -159,15 +160,19 @@ class Book {
     $book->setPreview($preview);
     $book->setUnits(Input::post('unitsbook'));
 
-    // now connect to the server
-    if($ftp->forge()){
-      // Upload the book
-      $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
+    //connect to the server
+    $ftp = FTP::forge();
+
+    //upload the book
+    if ($ftp->upload('books/' . $preview, getenv('FTP_DIR') . $preview, auto , 0444)) {
+      //delete the temporary copy of the file
+      File::delete("books/" . $preview);
       $ftp->close();
 
       //save the book in the database
       return BookModel::registerBook($book);
-    }else{
+    } else {
+      //if the upload failed return an error
       return false;
     }
   }
@@ -208,7 +213,8 @@ class Book {
     }
 
     //delete the old preview
-    File::delete("books/".$book->getPreview());
+    $ftp = FTP::forge();
+    $ftp->delete_file(getenv('FTP_DIR') . $book->getPreview());
 
     //set the book data
     $book->setName(Input::post('namebook'));
@@ -219,28 +225,19 @@ class Book {
     $book->setPreview($preview);
     $book->setUnits(Input::post('unitsbook'));
 
-    if ($ftp->forge()) {
-      // delete a file in any of the ftp servers
-      if (!$ftp->delete_file('books/' . $book->getName())) {
-        //delete failed
-        return false;
-      } else {
-        $ftp->close();
-      }
-    } else {
-      return false;
-    }
 
-    if ($ftp->forge()) {
-      // Upload the book to update it
-      $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
+    // Upload the book to update it
+    if ($ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666)) {
+      //delete the temporary copy of the file
+      File::delete("books/" . $preview);
       $ftp->close();
+
+      //update the book in the database
+      return BookModel::updateBook($book);
     } else {
+      //if the upload failed return an error
       return false;
     }
-
-    //update the book in the database
-    return BookModel::updateBook($book);
   }
 
   /**
@@ -257,23 +254,14 @@ class Book {
       return false;
     }
 
-    if ($ftp->forge()) {
-      // delete a file in any of the ftp servers
-      if (!$ftp->delete_file('books/' . $book->getName())) {
-        //delete failed
-        return false;
-      } else {
-        $ftp->close();
-        return true;
-      }
-    } else {
-      return false;
-    }
-  }
+    //delete a file in any of the ftp servers
+    $ftp = FTP::forge();
+    $ftp->delete_file('books/' . $book->getPreview());
+    $ftp->close();
 
-  //delete the preview and the book from the database
-  File::delete("books/".$book->getPreview());
-  return BookModel::deleteBook($bookId);
+    //delete the book from the database
+    return BookModel::deleteBook($bookId);
+  }
 
   /**
    * Get the list of all book categories
