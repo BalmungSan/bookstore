@@ -159,18 +159,19 @@ class Book {
     $book->setPreview($preview);
     $book->setUnits(Input::post('unitsbook'));
 
-    //save the book in the database
-    return BookModel::registerBook($book);
-
     // now connect to the server
     if($ftp->forge()){
       // Upload the book
       $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
       $ftp->close();
+
+      //save the book in the database
+      return BookModel::registerBook($book);
     }else{
       return false;
     }
-    
+  }
+
 
   /**
    * Edit the data of a book
@@ -218,66 +219,70 @@ class Book {
     $book->setPreview($preview);
     $book->setUnits(Input::post('unitsbook'));
 
-    if($ftp->forge()){
+    if ($ftp->forge()) {
       // delete a file in any of the ftp servers
-      if ( ! $ftp->delete_file('books/' . $book->getName()){
+      if (!$ftp->delete_file('books/' . $book->getName())) {
         //delete failed
         return false;
-      }else{
+      } else {
         ftp->close();
       }
-    }else{
+    } else {
       return false;
     }
 
-    if($ftp->forge()){
+    if ($ftp->forge()) {
       // Upload the book to update it
       $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
       $ftp->close();
-    }else{
+    } else {
       return false;
     }
+
     //update the book in the database
     return BookModel::updateBook($book);
-
-/**
- * Delete a book
- * @param bookId the id of the book to delete
- * @access app
- * @return true on success, false otherwise
- * @see BookModel::updateBook($book)
- */
-public static function deleteBook($bookId) {
-  //check that the user deleting this book is the owner of the book
-  $book = BookModel::getBook($bookId);
-  if ($book->getUser() != Input::post('useridbook')) {
-    return false;
   }
 
-  if($ftp->forge()){
-    // delete a file in any of the ftp servers
-    if ( ! $ftp->delete_file('books/' . $book->getName()){
-      //delete failed
+  /**
+   * Delete a book
+   * @param bookId the id of the book to delete
+   * @access app
+   * @return true on success, false otherwise
+   * @see BookModel::updateBook($book)
+   */
+  public static function deleteBook($bookId) {
+    //check that the user deleting this book is the owner of the book
+    $book = BookModel::getBook($bookId);
+    if ($book->getUser() != Input::post('useridbook')) {
       return false;
-    }else{
-      ftp->close();
     }
-  }else{
-    return false;
-  }      
+
+    if ($ftp->forge()) {
+      // delete a file in any of the ftp servers
+      if (!$ftp->delete_file('books/' . $book->getName())) {
+        //delete failed
+        return false;
+      } else {
+        ftp->close();
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
 
   //delete the preview and the book from the database
   File::delete("books/".$book->getPreview());
   return BookModel::deleteBook($bookId);
- 
-/**
- * Get the list of all book categories
- * @access app
- * @return an array with the categories
- * @see BookModel::getCategories()
- */
-public static function getCategories() {
-  return BookModel::getCategories();
-}
+
+  /**
+   * Get the list of all book categories
+   * @access app
+   * @return an array with the categories
+   * @see BookModel::getCategories()
+   */
+  public static function getCategories() {
+    return BookModel::getCategories();
+  }
 }
 ?>
