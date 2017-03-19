@@ -175,7 +175,7 @@
         //if they are invalid, return an error message
         return array(false, 'invalid username or password');
       } else if ($auth->delete_user($email)) {
-        //if the delete process failed, return true
+        //if the delete process succeed, return true
         return array(true);
       } else {
         //if the delete process failed, return an error message
