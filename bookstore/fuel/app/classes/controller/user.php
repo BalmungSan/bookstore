@@ -94,7 +94,7 @@
       $status = AuxUser::deleteUser();
       if ($status[0]) {
         //if the delete user process worked, log out
-        echo '<script>alert("Password Changed");</script>';
+        echo '<script>alert("Account Deleted");</script>';
         Response::redirect('/profile/logOut');
       } else {
         //if not, print the error message

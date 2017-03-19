@@ -84,7 +84,7 @@ function deleteprofile(){
     var emailAddress = document.createElement("input");
     emailAddress.setAttribute("type", "hidden");
     emailAddress.setAttribute("name", "email");
-    emailAddress.setAttribute("value", emailAddress);
+    emailAddress.setAttribute("value", email);
     form.appendChild(emailAddress);
     
     var pass = prompt("Please enter your password", "Password");

@@ -70,7 +70,7 @@
     public static function changePassword() {
       //get the user old and new password
       $oldPassword = Input::post('password');
-      $newPassword = Input::post('newPassword');
+      $newPassword = Input::post('newpassword');
       
       //try to change the password
       if ($oldPassword == $newPassword) {
