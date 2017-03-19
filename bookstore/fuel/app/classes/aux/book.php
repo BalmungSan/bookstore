@@ -163,32 +163,9 @@
 		  return BookModel::registerBook($book);
 
       // create an ftp object, but don't connect
+      // FTP_HOST is the virtual IP made by the pacemaker cluster
       $ftp = Ftp::forge(array(
-      'hostname' => getenv('FTP_HOST_M'),
-      'username' => 'user',
-      'password' => 'bookstore',
-      'timeout'  => 90,
-      'port'     => getenv('FTP_PORT'),
-      'passive'  => true,
-      'ssl_mode' => false,
-      'debug'    => false
-      ), false);
-
-      //ftp object2, slave 1
-      $ftp2 = Ftp::forge(array(
-      'hostname' => getenv('FTP_HOST_S1'),
-      'username' => 'user',
-      'password' => 'bookstore',
-      'timeout'  => 90,
-      'port'     => getenv('FTP_PORT'),
-      'passive'  => true,
-      'ssl_mode' => false,
-      'debug'    => false
-      ), false);
-
-      //ftp object3, slave 2
-      $ftp3 = Ftp::forge(array(
-      'hostname' => getenv('FTP_HOST_S2'),
+      'hostname' => getenv('FTP_HOST'),
       'username' => 'user',
       'password' => 'bookstore',
       'timeout'  => 90,
@@ -201,14 +178,8 @@
       // now connect to the server
       if($ftp->connect();){
         // Upload the book 
-        $ftp->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
         $ftp->close();
-      }elseif($ftp2->connect();){
-        $ftp2->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
-        $ftp2->close();
-      }elseif($ftp3->connect();){
-        $ftp3->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
-        $ftp3->close();
       }else{
         $message = "Failed to connect to the FTP servers. Try again or later";
         echo "<script type='text/javascript'>alert('$message');</script>";
@@ -265,17 +236,9 @@
 		  return BookModel::updateBook($book);
 
       if($ftp->connect();){
-      // delete a file in master
-      if ( ! $ftp->delete_file('books/' + $book->getName() + '.pdf')
-      {
-        if($ftp2->connect();){
-        // delete a file in slave 1
-        if ( ! $ftp2->delete_file('books/' + $book->getName() + '.pdf')
-        {
-          if($ftp3->connect();){
-          // delete a file in slave 2
-          if ( ! $ftp3->delete_file('books/' + $book->getName() + '.pdf')
-          {
+      // delete a file in any of the ftp servers
+      if ( ! $ftp->delete_file('books/' . $book->getName()){
+        }
           //delete failed
             $message = "Failed to connect to the FTP servers. Try again or later";
             echo "<script type='text/javascript'>alert('$message');</script>";
@@ -283,19 +246,10 @@
         }
       }
     
-
       if($ftp->connect();){
-        // Upload the book in master
-        $ftp->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
+        // Upload the book to update it
+        $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
         $ftp->close();
-      }elseif($ftp2->connect();){
-        // Upload the book in slave 1
-        $ftp2->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
-        $ftp2->close();
-      }elseif($ftp3->connect();){
-        // Upload the book in slave 2
-        $ftp3->upload('books/' + $book->getName() + '.pdf', getenv('FTP_DIR'), auto , 0666);
-        $ftp3->close();
       }else{
         $message = "Failed to connect to the FTP servers. Try again or later";
         echo "<script type='text/javascript'>alert('$message');</script>";
@@ -322,17 +276,9 @@
     
 
       if($ftp->connect();){
-      // delete a file in master
-      if ( ! $ftp->delete_file('books/' + $book->getName() + '.pdf')
+      // delete a file in any of the ftp servers
+      if ( ! $ftp->delete_file('books/' . $book->getName())
       {
-        if($ftp2->connect();){
-        // delete a file in slave 1
-        if ( ! $ftp2->delete_file('books/' + $book->getName() + '.pdf')
-        {
-          if($ftp3->connect();){
-          // delete a file in slave 2
-          if ( ! $ftp3->delete_file('books/' + $book->getName() + '.pdf')
-          {
           //delete failed
             $message = "Failed to connect to the FTP servers. Try again or later";
             echo "<script type='text/javascript'>alert('$message');</script>";
