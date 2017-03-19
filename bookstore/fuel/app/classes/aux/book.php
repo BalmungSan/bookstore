@@ -162,29 +162,15 @@ class Book {
     //save the book in the database
     return BookModel::registerBook($book);
 
-    // create an ftp object, but don't connect
-    // FTP_HOST is the virtual IP made by the pacemaker cluster
-    $ftp = Ftp::forge(array(
-      'hostname' => getenv('FTP_HOST'),
-      'username' => 'user',
-      'password' => 'bookstore',
-      'timeout'  => 90,
-      'port'     => getenv('FTP_PORT'),
-      'passive'  => true,
-      'ssl_mode' => false,
-      'debug'    => false
-    ), false);
-
     // now connect to the server
     if($ftp->connect();){
       // Upload the book
       $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
       $ftp->close();
     }else{
-      $message = "Failed to connect to the FTP servers. Try again or later";
-      echo "<script type='text/javascript'>alert('$message');</script>";
+      return false;
     }
-  }
+    
 
   /**
    * Edit the data of a book
@@ -232,29 +218,28 @@ class Book {
     $book->setPreview($preview);
     $book->setUnits(Input::post('unitsbook'));
 
+    if($ftp->connect()){
+      // delete a file in any of the ftp servers
+      if ( ! $ftp->delete_file('books/' . $book->getName()){
+        //delete failed
+        return false;
+      }
+    }else{
+      return false;
+    }
+
+    if($ftp->connect()){
+      // Upload the book to update it
+      $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
+      $ftp->close();
+    }else{
+      return false;
+    }
     //update the book in the database
     return BookModel::updateBook($book);
 
-    if($ftp->connect();){
-      // delete a file in any of the ftp servers
-      if ( ! $ftp->delete_file('books/' . $book->getName()){
-        }
-        //delete failed
-        $message = "Failed to connect to the FTP servers. Try again or later";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-        }
-    }
-  }
+    
 
-  if($ftp->connect();){
-    // Upload the book to update it
-    $ftp->upload('books/' . $book->getName(), getenv('FTP_DIR'), auto , 0666);
-    $ftp->close();
-  }else{
-    $message = "Failed to connect to the FTP servers. Try again or later";
-    echo "<script type='text/javascript'>alert('$message');</script>";
-  }
-}
 
 /**
  * Delete a book
@@ -270,22 +255,21 @@ public static function deleteBook($bookId) {
     return false;
   }
 
+  if($ftp->connect()){
+    // delete a file in any of the ftp servers
+    if ( ! $ftp->delete_file('books/' . $book->getName()){
+      //delete failed
+      return false;
+  }else{
+    return false;  
+  }      
+
   //delete the preview and the book from the database
   File::delete("books/".$book->getPreview());
   return BookModel::deleteBook($bookId);
 
 
-  if($ftp->connect();){
-    // delete a file in any of the ftp servers
-    if ( ! $ftp->delete_file('books/' . $book->getName())
-         {
-           //delete failed
-           $message = "Failed to connect to the FTP servers. Try again or later";
-           echo "<script type='text/javascript'>alert('$message');</script>";
-         }
-         }
-  }
-}
+  
 
 /**
  * Get the list of all book categories
